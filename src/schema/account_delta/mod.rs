@@ -76,19 +76,19 @@ pub enum AccountDataDelta {
         #[serde(rename = "l")]
         length: u16,
         #[serde(rename = "s")]
-        segments: Vec<AccountDataDeltaSegment>,
+        segments: Vec<DeltaSegment>,
     },
     #[serde(rename = "U")]
     Updated {
         #[serde(rename = "s")]
-        segments: Vec<AccountDataDeltaSegment>,
+        segments: Vec<DeltaSegment>,
     },
     #[serde(rename = "C")]
     Closed,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct AccountDataDeltaSegment {
+pub struct DeltaSegment {
     #[serde(rename = "o")]
     pub offset: u16,
     #[serde(rename = "d", with = "vec_u8_as_base64_string")]
