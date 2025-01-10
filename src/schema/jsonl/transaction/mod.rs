@@ -39,7 +39,7 @@ Each line is a JSON object with the following schema:
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
-pub struct WhirlpoolTransaction {
+pub struct WhirlpoolTransactionBlock {
   pub slot: u64,
   pub block_height: u64,
   pub block_time: i64,

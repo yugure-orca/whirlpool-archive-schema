@@ -1,4 +1,4 @@
-use serde_derive::Serialize;
+use serde_derive::{Deserialize, Serialize};
 use crate::serde::{big_decimal_as_string, u128_as_string, u64_as_string};
 
 /*
@@ -83,7 +83,7 @@ pub type PubkeyString = String;
 pub type DecimalPrice = bigdecimal::BigDecimal;
 pub type Decimals = u8;
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvDailyData {
   #[serde(flatten)]
   pub metadata: WhirlpoolOhlcvMetadata,
@@ -95,7 +95,7 @@ pub struct WhirlpoolOhlcvDailyData {
   pub daily: WhirlpoolOhlcvDataUnit,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvMinutelyData {
   #[serde(flatten)]
   pub metadata: WhirlpoolOhlcvMetadata,
@@ -109,7 +109,7 @@ pub struct WhirlpoolOhlcvMinutelyData {
   pub minutely: Vec<WhirlpoolOhlcvDataUnit>,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvMetadata {
   #[serde(rename = "w")]
   pub whirlpool: PubkeyString,
@@ -123,7 +123,7 @@ pub struct WhirlpoolOhlcvMetadata {
   pub tick_spacing: u16,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct TokenData {
   #[serde(rename = "m")]
   pub mint: PubkeyString,
@@ -131,7 +131,7 @@ pub struct TokenData {
   pub decimals: Decimals,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(tag = "t", content = "p")]
 pub enum InitialState {
   #[serde(rename = "e")]
@@ -154,7 +154,7 @@ pub enum InitialState {
   },
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct EstimatedFees {
   #[serde(rename = "lpfa", with = "u64_as_string")]
   pub liquidity_provider_fee_a: u64,
@@ -166,7 +166,7 @@ pub struct EstimatedFees {
   pub protocol_fee_b: u64,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvDataUnit {
   #[serde(rename = "t")]
   pub timestamp: i64,
@@ -176,7 +176,7 @@ pub struct WhirlpoolOhlcvDataUnit {
   pub volume: VolumeData,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvData {
   #[serde(rename = "sp")]
   pub sqrt_price: SqrtPriceData,
@@ -184,7 +184,7 @@ pub struct WhirlpoolOhlcvData {
   pub decimal_price: DecimalPriceData,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct SqrtPriceData {
   #[serde(rename = "o", with = "u128_as_string")]
   pub open: u128,
@@ -196,7 +196,7 @@ pub struct SqrtPriceData {
   pub close: u128,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct DecimalPriceData {
   #[serde(rename = "o", with = "big_decimal_as_string")]
   pub open: DecimalPrice,
@@ -208,13 +208,13 @@ pub struct DecimalPriceData {
   pub close: DecimalPrice,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct VolumeData {
   pub ab: VolumeDirectionData,
   pub ba: VolumeDirectionData,
 }
 
-#[derive(Serialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct VolumeDirectionData {
   #[serde(rename = "ti", with = "u128_as_string")]
   pub total_in: u128,
