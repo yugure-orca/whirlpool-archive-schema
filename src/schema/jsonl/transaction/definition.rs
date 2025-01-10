@@ -188,9 +188,9 @@ pub struct DecodedInitializePool {
   pub key_token_program: PubkeyString,
   pub key_system_program: PubkeyString,
   pub key_rent: PubkeyString,
-  #[cfg(feature = "decimals")]
+  #[cfg(feature = "transaction_decimals")]
   pub decimals_token_mint_a: u8,
-  #[cfg(feature = "decimals")]
+  #[cfg(feature = "transaction_decimals")]
   pub decimals_token_mint_b: u8,
 }
 
@@ -237,7 +237,7 @@ pub struct DecodedInitializeReward {
   pub key_token_program: PubkeyString,
   pub key_system_program: PubkeyString,
   pub key_rent: PubkeyString,
-  #[cfg(feature = "decimals")]
+  #[cfg(feature = "transaction_decimals")]
   pub decimals_reward_mint: u8,
 }
 
@@ -702,9 +702,9 @@ pub struct DecodedInitializePoolV2 {
   pub key_token_program_b: PubkeyString,
   pub key_system_program: PubkeyString,
   pub key_rent: PubkeyString,
-  #[cfg(feature = "decimals")]
+  #[cfg(feature = "transaction_decimals")]
   pub decimals_token_mint_a: u8,
-  #[cfg(feature = "decimals")]
+  #[cfg(feature = "transaction_decimals")]
   pub decimals_token_mint_b: u8,
 }
 
@@ -721,7 +721,7 @@ pub struct DecodedInitializeRewardV2 {
   pub key_reward_token_program: PubkeyString,
   pub key_system_program: PubkeyString,
   pub key_rent: PubkeyString,
-  #[cfg(feature = "decimals")]
+  #[cfg(feature = "transaction_decimals")]
   pub decimals_reward_mint: u8,
 }
 
