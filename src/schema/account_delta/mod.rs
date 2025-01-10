@@ -47,7 +47,7 @@ Each line is a JSON object with the following schema:
 */
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
-pub struct WhirlpoolAccountDeltaBlock {
+pub struct WhirlpoolAccountDeltaSet {
     #[serde(rename = "s")]
     pub slot: Slot,
     #[serde(rename = "h")]

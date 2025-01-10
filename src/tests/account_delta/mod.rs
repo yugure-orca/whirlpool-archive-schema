@@ -1,11 +1,11 @@
-use crate::schema::account_delta::{AccountType, WhirlpoolAccountDeltaBlock, AccountDataDelta};
+use crate::schema::account_delta::{AccountType, WhirlpoolAccountDeltaSet, AccountDataDelta};
 use crate::tests::utils::{from_base64, jsonify};
 
 const TEST_DATA: &str = include_str!("test.json");
 
 #[test]
 fn test_deserialize() {
-    let deserialized: WhirlpoolAccountDeltaBlock = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: WhirlpoolAccountDeltaSet = serde_json::from_str(TEST_DATA).unwrap();
 
     assert_eq!(deserialized.slot, 313051640);
     assert_eq!(deserialized.block_height, 291364715);
@@ -57,7 +57,7 @@ fn test_deserialize() {
 
 #[test]
 fn test_serialize() {
-    let deserialized: WhirlpoolAccountDeltaBlock = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: WhirlpoolAccountDeltaSet = serde_json::from_str(TEST_DATA).unwrap();
     let serialized = jsonify(&deserialized);
     assert_eq!(serialized, TEST_DATA.trim_end().to_string());
 }

@@ -1,11 +1,11 @@
-use crate::schema::transaction::{WhirlpoolTransactionBlock, DecodedInstruction, DecodedWhirlpoolInstruction};
+use crate::schema::transaction::{WhirlpoolTransactionSet, DecodedInstruction, DecodedWhirlpoolInstruction};
 use crate::tests::utils::{from_base64, jsonify};
 
 const TEST_DATA: &str = include_str!("test.json");
 
 #[test]
 fn test_deserialize() {
-    let deserialized: WhirlpoolTransactionBlock = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: WhirlpoolTransactionSet = serde_json::from_str(TEST_DATA).unwrap();
 
     assert_eq!(deserialized.slot, 268396603);
     assert_eq!(deserialized.block_height, 248114148);
@@ -49,7 +49,7 @@ fn test_deserialize() {
 
 #[test]
 fn test_serialize() {
-    let deserialized: WhirlpoolTransactionBlock = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: WhirlpoolTransactionSet = serde_json::from_str(TEST_DATA).unwrap();
     let serialized = jsonify(&deserialized);
     assert_eq!(serialized, TEST_DATA.trim_end().to_string());
 }
