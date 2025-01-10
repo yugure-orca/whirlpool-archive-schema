@@ -39,7 +39,7 @@ Each line is a JSON object with the following schema:
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
-pub struct WhirlpoolTransactionSet {
+pub struct BlockWhirlpoolTransaction {
     pub slot: Slot,
     pub block_height: BlockHeight,
     pub block_time: BlockTime,
@@ -52,13 +52,13 @@ pub struct WhirlpoolTransaction {
     pub index: u32,
     pub signature: SignatureString,
     pub payer: PubkeyString,
-    pub balances: Vec<BalanceChange>,
-    pub instructions: Vec<DecodedInstruction>,
+    pub balances: Vec<TokenBalanceChange>,
+    pub instructions: Vec<ProgramDeployOrWhirlpoolInstruction>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
-pub struct BalanceChange {
+pub struct TokenBalanceChange {
     pub account: PubkeyString,
     #[serde(with = "u64_as_string")]
     pub pre: u64,
@@ -68,21 +68,21 @@ pub struct BalanceChange {
 
 #[allow(clippy::large_enum_variant)]
 #[derive(Debug, PartialEq, Eq, Clone)]
-pub enum DecodedInstruction {
-    ProgramDeployInstruction(DecodedProgramDeployInstruction),
-    WhirlpoolInstruction(DecodedWhirlpoolInstruction),
+pub enum ProgramDeployOrWhirlpoolInstruction {
+    ProgramDeployInstruction(ProgramDeployInstruction),
+    WhirlpoolInstruction(WhirlpoolInstruction),
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
-pub struct DecodedProgramDeployInstruction {
+pub struct ProgramDeployInstruction {
     #[serde(with = "vec_u8_as_base64_string")]
     pub program_data: Bytes,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase", tag = "name", content = "payload")]
-pub enum DecodedWhirlpoolInstruction {
+pub enum WhirlpoolInstruction {
     AdminIncreaseLiquidity(DecodedAdminIncreaseLiquidity),
     CloseBundledPosition(DecodedCloseBundledPosition),
     ClosePosition(DecodedClosePosition),
@@ -134,27 +134,27 @@ pub enum DecodedWhirlpoolInstruction {
     ClosePositionWithTokenExtensions(DecodedClosePositionWithTokenExtensions),
 }
 
-impl serde::Serialize for DecodedInstruction {
+impl serde::Serialize for ProgramDeployOrWhirlpoolInstruction {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
         use serde::ser::SerializeStruct;
         match self {
-            DecodedInstruction::ProgramDeployInstruction(instruction) => {
+            ProgramDeployOrWhirlpoolInstruction::ProgramDeployInstruction(instruction) => {
                 let mut state = serializer.serialize_struct("TransactionInstruction", 2)?;
                 state.serialize_field("name", "programDeploy")?;
                 state.serialize_field("payload", instruction)?;
                 state.end()
             }
-            DecodedInstruction::WhirlpoolInstruction(instruction) => {
+            ProgramDeployOrWhirlpoolInstruction::WhirlpoolInstruction(instruction) => {
                 instruction.serialize(serializer)
             }
         }
     }
 }
 
-impl<'de> serde::Deserialize<'de> for DecodedInstruction {
+impl<'de> serde::Deserialize<'de> for ProgramDeployOrWhirlpoolInstruction {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
@@ -169,13 +169,13 @@ impl<'de> serde::Deserialize<'de> for DecodedInstruction {
             let payload = value
                 .get("payload")
                 .ok_or_else(|| serde::de::Error::missing_field("payload"))?;
-            let instruction = DecodedProgramDeployInstruction::deserialize(payload)
+            let instruction = ProgramDeployInstruction::deserialize(payload)
                 .map_err(serde::de::Error::custom)?;
-            Ok(DecodedInstruction::ProgramDeployInstruction(instruction))
+            Ok(ProgramDeployOrWhirlpoolInstruction::ProgramDeployInstruction(instruction))
         } else {
-            let instruction = DecodedWhirlpoolInstruction::deserialize(value)
+            let instruction = WhirlpoolInstruction::deserialize(value)
                 .map_err(serde::de::Error::custom)?;
-            Ok(DecodedInstruction::WhirlpoolInstruction(instruction))
+            Ok(ProgramDeployOrWhirlpoolInstruction::WhirlpoolInstruction(instruction))
         }
     }
 }

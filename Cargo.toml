@@ -1,11 +1,11 @@
 [package]
 name = "whirlpool-archives"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [features]
 default = []
-transaction_decimals = []
+without_transaction_decimals = []
 
 [dependencies]
 serde = "1.0.188"

@@ -1,11 +1,11 @@
-use crate::schema::event::{WhirlpoolEvent, WhirlpoolEventSet};
+use crate::schema::event::{WhirlpoolEvent, BlockWhirlpoolEvent};
 use crate::tests::utils::jsonify;
 
 const TEST_DATA: &str = include_str!("test.json");
 
 #[test]
 fn test_deserialize() {
-    let deserialized: WhirlpoolEventSet = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: BlockWhirlpoolEvent = serde_json::from_str(TEST_DATA).unwrap();
 
     assert_eq!(deserialized.slot, 268396603);
     assert_eq!(deserialized.block_height, 248114148);
@@ -50,7 +50,7 @@ fn test_deserialize() {
 
 #[test]
 fn test_serialize() {
-    let deserialized: WhirlpoolEventSet = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: BlockWhirlpoolEvent = serde_json::from_str(TEST_DATA).unwrap();
     let serialized = jsonify(&deserialized);
     assert_eq!(serialized, TEST_DATA.trim_end().to_string());
 }

@@ -32,7 +32,7 @@ Each line is a JSON object with the following schema:
 */
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
-pub struct WhirlpoolEventSet {
+pub struct BlockWhirlpoolEvent {
     #[serde(rename = "s")]
     pub slot: Slot,
     #[serde(rename = "h")]
@@ -40,11 +40,11 @@ pub struct WhirlpoolEventSet {
     #[serde(rename = "t")]
     pub block_time: BlockTime,
     #[serde(rename = "x")]
-    pub transactions: Vec<WhirlpoolEventTransaction>,
+    pub transactions: Vec<TransactionWhirlpoolEvent>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct WhirlpoolEventTransaction {
+pub struct TransactionWhirlpoolEvent {
     #[serde(rename = "s")]
     pub signature: SignatureString,
     #[serde(rename = "p")]

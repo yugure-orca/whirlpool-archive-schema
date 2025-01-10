@@ -47,7 +47,7 @@ Each line is a JSON object with the following schema:
 */
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
-pub struct WhirlpoolAccountDeltaSet {
+pub struct BlockWhirlpoolAccountDelta {
     #[serde(rename = "s")]
     pub slot: Slot,
     #[serde(rename = "h")]
@@ -63,7 +63,7 @@ pub struct WhirlpoolAccountDelta {
     #[serde(rename = "p")]
     pub pubkey: PubkeyString,
     #[serde(rename = "t")]
-    pub account_type: AccountType,
+    pub account_type: WhirlpoolAccountType,
     #[serde(flatten)]
     pub delta: AccountDataDelta,
 }
@@ -76,19 +76,19 @@ pub enum AccountDataDelta {
         #[serde(rename = "l")]
         length: u16,
         #[serde(rename = "s")]
-        segments: Vec<DeltaSegment>,
+        segments: Vec<DataDeltaSegment>,
     },
     #[serde(rename = "U")]
     Updated {
         #[serde(rename = "s")]
-        segments: Vec<DeltaSegment>,
+        segments: Vec<DataDeltaSegment>,
     },
     #[serde(rename = "C")]
     Closed,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct DeltaSegment {
+pub struct DataDeltaSegment {
     #[serde(rename = "o")]
     pub offset: u16,
     #[serde(rename = "d", with = "vec_u8_as_base64_string")]
@@ -96,7 +96,7 @@ pub struct DeltaSegment {
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub enum AccountType {
+pub enum WhirlpoolAccountType {
     #[serde(rename = "C")]
     Config,
     #[serde(rename = "CE")]

@@ -1,11 +1,11 @@
-use crate::schema::account_delta::{AccountDataDelta, AccountType, WhirlpoolAccountDeltaSet};
+use crate::schema::account_delta::{AccountDataDelta, WhirlpoolAccountType, BlockWhirlpoolAccountDelta};
 use crate::tests::utils::{from_base64, jsonify};
 
 const TEST_DATA: &str = include_str!("test.json");
 
 #[test]
 fn test_deserialize() {
-    let deserialized: WhirlpoolAccountDeltaSet = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: BlockWhirlpoolAccountDelta = serde_json::from_str(TEST_DATA).unwrap();
 
     assert_eq!(deserialized.slot, 313051640);
     assert_eq!(deserialized.block_height, 291364715);
@@ -18,7 +18,7 @@ fn test_deserialize() {
         deltas_0.pubkey,
         "BtCDvZXqLLJyzh8bJWYW4hLPdJZi7cQWJ1CWwU9sA2G6"
     );
-    assert_eq!(deltas_0.account_type, AccountType::TickArray);
+    assert_eq!(deltas_0.account_type, WhirlpoolAccountType::TickArray);
     match &deltas_0.delta {
         AccountDataDelta::Updated { segments } => {
             assert_eq!(segments.len(), 1);
@@ -36,7 +36,7 @@ fn test_deserialize() {
         deltas_2.pubkey,
         "8bRkqN6w7EREgJ58BqNEXBa2uUBpvHD79WiwXhLAUkb5"
     );
-    assert_eq!(deltas_2.account_type, AccountType::Position);
+    assert_eq!(deltas_2.account_type, WhirlpoolAccountType::Position);
     match &deltas_2.delta {
         AccountDataDelta::Initialized { length, segments } => {
             assert_eq!(*length, 216);
@@ -52,7 +52,7 @@ fn test_deserialize() {
         deltas_13.pubkey,
         "9vNKzrrHAjqjuTGLjCBo9Ai4edMYgP9dsG4tFZ2hF251"
     );
-    assert_eq!(deltas_13.account_type, AccountType::Whirlpool);
+    assert_eq!(deltas_13.account_type, WhirlpoolAccountType::Whirlpool);
     match &deltas_13.delta {
         AccountDataDelta::Updated { segments } => {
             assert_eq!(segments.len(), 3);
@@ -72,7 +72,7 @@ fn test_deserialize() {
 
 #[test]
 fn test_serialize() {
-    let deserialized: WhirlpoolAccountDeltaSet = serde_json::from_str(TEST_DATA).unwrap();
+    let deserialized: BlockWhirlpoolAccountDelta = serde_json::from_str(TEST_DATA).unwrap();
     let serialized = jsonify(&deserialized);
     assert_eq!(serialized, TEST_DATA.trim_end().to_string());
 }

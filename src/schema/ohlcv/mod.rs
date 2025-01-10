@@ -83,7 +83,7 @@ Each line is a JSON object with the following schema:
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvDailyData {
     #[serde(flatten)]
-    pub metadata: OhlcvMetadata,
+    pub metadata: WhirlpoolOhlcvMetadata,
     #[serde(rename = "is")]
     pub initial_state: InitialState,
     #[serde(rename = "ef")]
@@ -95,7 +95,7 @@ pub struct WhirlpoolOhlcvDailyData {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvMinutelyData {
     #[serde(flatten)]
-    pub metadata: OhlcvMetadata,
+    pub metadata: WhirlpoolOhlcvMetadata,
     #[serde(rename = "is")]
     pub initial_state: InitialState,
     #[serde(rename = "ef")]
@@ -107,7 +107,7 @@ pub struct WhirlpoolOhlcvMinutelyData {
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct OhlcvMetadata {
+pub struct WhirlpoolOhlcvMetadata {
     #[serde(rename = "w")]
     pub whirlpool: PubkeyString,
     #[serde(rename = "wc")]
