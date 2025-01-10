@@ -1,5 +1,5 @@
 use crate::serde::big_decimal_as_string;
-use crate::types::{PubkeyString, DecimalPrice};
+use crate::types::{DecimalPrice, PubkeyString};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

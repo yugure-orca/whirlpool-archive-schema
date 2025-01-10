@@ -1,6 +1,6 @@
-use serde_derive::{Deserialize, Serialize};
-use crate::types::{Slot, BlockHeight, BlockTime, PubkeyString, Bytes};
 use crate::serde::vec_u8_as_base64_string;
+use crate::types::{BlockHeight, BlockTime, Bytes, PubkeyString, Slot};
+use serde_derive::{Deserialize, Serialize};
 
 /*
 

@@ -1,6 +1,6 @@
-use crate::serde::{big_decimal_as_string, u128_as_string};
-use crate::types::{PubkeyString, DecimalPrice};
 use super::TransferInfo;
+use crate::serde::{big_decimal_as_string, u128_as_string};
+use crate::types::{DecimalPrice, PubkeyString};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

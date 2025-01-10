@@ -1,6 +1,6 @@
+use crate::serde::{u64_as_string, vec_u8_as_base64_string};
+use crate::types::{BlockHeight, BlockTime, Bytes, PubkeyString, SignatureString, Slot};
 use serde_derive::{Deserialize, Serialize};
-use crate::serde::{vec_u8_as_base64_string, u64_as_string};
-use crate::types::{Slot, BlockHeight, BlockTime, PubkeyString, SignatureString, Bytes};
 mod definition;
 pub use definition::*;
 
@@ -40,140 +40,142 @@ Each line is a JSON object with the following schema:
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct WhirlpoolTransactionSet {
-  pub slot: Slot,
-  pub block_height: BlockHeight,
-  pub block_time: BlockTime,
-  pub transactions: Vec<WhirlpoolTransaction>,
+    pub slot: Slot,
+    pub block_height: BlockHeight,
+    pub block_time: BlockTime,
+    pub transactions: Vec<WhirlpoolTransaction>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct WhirlpoolTransaction {
-  pub index: u32,
-  pub signature: SignatureString,
-  pub payer: PubkeyString,
-  pub balances: Vec<BalanceChange>,
-  pub instructions: Vec<DecodedInstruction>,
+    pub index: u32,
+    pub signature: SignatureString,
+    pub payer: PubkeyString,
+    pub balances: Vec<BalanceChange>,
+    pub instructions: Vec<DecodedInstruction>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct BalanceChange {
-  pub account: PubkeyString,
-  #[serde(with = "u64_as_string")]
-  pub pre: u64,
-  #[serde(with = "u64_as_string")]
-  pub post: u64,
+    pub account: PubkeyString,
+    #[serde(with = "u64_as_string")]
+    pub pre: u64,
+    #[serde(with = "u64_as_string")]
+    pub post: u64,
 }
 
 #[allow(clippy::large_enum_variant)]
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum DecodedInstruction {
-  ProgramDeployInstruction(DecodedProgramDeployInstruction),
-  WhirlpoolInstruction(DecodedWhirlpoolInstruction),
+    ProgramDeployInstruction(DecodedProgramDeployInstruction),
+    WhirlpoolInstruction(DecodedWhirlpoolInstruction),
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedProgramDeployInstruction {
-  #[serde(with = "vec_u8_as_base64_string")]
-  pub program_data: Bytes,
+    #[serde(with = "vec_u8_as_base64_string")]
+    pub program_data: Bytes,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase", tag = "name", content = "payload")]
 pub enum DecodedWhirlpoolInstruction {
-  AdminIncreaseLiquidity(DecodedAdminIncreaseLiquidity),
-  CloseBundledPosition(DecodedCloseBundledPosition),
-  ClosePosition(DecodedClosePosition),
-  CollectFees(DecodedCollectFees),
-  CollectProtocolFees(DecodedCollectProtocolFees),
-  CollectReward(DecodedCollectReward),
-  DecreaseLiquidity(DecodedDecreaseLiquidity),
-  DeletePositionBundle(DecodedDeletePositionBundle),
-  IncreaseLiquidity(DecodedIncreaseLiquidity),
-  InitializeConfig(DecodedInitializeConfig),
-  InitializeFeeTier(DecodedInitializeFeeTier),
-  InitializePool(DecodedInitializePool),
-  InitializePositionBundle(DecodedInitializePositionBundle),
-  InitializePositionBundleWithMetadata(DecodedInitializePositionBundleWithMetadata),
-  InitializeReward(DecodedInitializeReward),
-  InitializeTickArray(DecodedInitializeTickArray),
-  OpenBundledPosition(DecodedOpenBundledPosition),
-  OpenPosition(DecodedOpenPosition),
-  OpenPositionWithMetadata(DecodedOpenPositionWithMetadata),
-  SetCollectProtocolFeesAuthority(DecodedSetCollectProtocolFeesAuthority),
-  SetDefaultFeeRate(DecodedSetDefaultFeeRate),
-  SetDefaultProtocolFeeRate(DecodedSetDefaultProtocolFeeRate),
-  SetFeeAuthority(DecodedSetFeeAuthority),
-  SetFeeRate(DecodedSetFeeRate),
-  SetProtocolFeeRate(DecodedSetProtocolFeeRate),
-  SetRewardAuthority(DecodedSetRewardAuthority),
-  SetRewardAuthorityBySuperAuthority(DecodedSetRewardAuthorityBySuperAuthority),
-  SetRewardEmissions(DecodedSetRewardEmissions),
-  SetRewardEmissionsSuperAuthority(DecodedSetRewardEmissionsSuperAuthority),
-  Swap(DecodedSwap),
-  TwoHopSwap(DecodedTwoHopSwap),
-  UpdateFeesAndRewards(DecodedUpdateFeesAndRewards),
-  CollectFeesV2(DecodedCollectFeesV2),
-  CollectProtocolFeesV2(DecodedCollectProtocolFeesV2),
-  CollectRewardV2(DecodedCollectRewardV2),
-  DecreaseLiquidityV2(DecodedDecreaseLiquidityV2),
-  IncreaseLiquidityV2(DecodedIncreaseLiquidityV2),
-  SwapV2(DecodedSwapV2),
-  TwoHopSwapV2(DecodedTwoHopSwapV2),
-  InitializePoolV2(DecodedInitializePoolV2),
-  InitializeRewardV2(DecodedInitializeRewardV2),
-  SetRewardEmissionsV2(DecodedSetRewardEmissionsV2),
-  InitializeConfigExtension(DecodedInitializeConfigExtension),
-  InitializeTokenBadge(DecodedInitializeTokenBadge),
-  DeleteTokenBadge(DecodedDeleteTokenBadge),
-  SetConfigExtensionAuthority(DecodedSetConfigExtensionAuthority),
-  SetTokenBadgeAuthority(DecodedSetTokenBadgeAuthority),
-  OpenPositionWithTokenExtensions(DecodedOpenPositionWithTokenExtensions),
-  ClosePositionWithTokenExtensions(DecodedClosePositionWithTokenExtensions),
+    AdminIncreaseLiquidity(DecodedAdminIncreaseLiquidity),
+    CloseBundledPosition(DecodedCloseBundledPosition),
+    ClosePosition(DecodedClosePosition),
+    CollectFees(DecodedCollectFees),
+    CollectProtocolFees(DecodedCollectProtocolFees),
+    CollectReward(DecodedCollectReward),
+    DecreaseLiquidity(DecodedDecreaseLiquidity),
+    DeletePositionBundle(DecodedDeletePositionBundle),
+    IncreaseLiquidity(DecodedIncreaseLiquidity),
+    InitializeConfig(DecodedInitializeConfig),
+    InitializeFeeTier(DecodedInitializeFeeTier),
+    InitializePool(DecodedInitializePool),
+    InitializePositionBundle(DecodedInitializePositionBundle),
+    InitializePositionBundleWithMetadata(DecodedInitializePositionBundleWithMetadata),
+    InitializeReward(DecodedInitializeReward),
+    InitializeTickArray(DecodedInitializeTickArray),
+    OpenBundledPosition(DecodedOpenBundledPosition),
+    OpenPosition(DecodedOpenPosition),
+    OpenPositionWithMetadata(DecodedOpenPositionWithMetadata),
+    SetCollectProtocolFeesAuthority(DecodedSetCollectProtocolFeesAuthority),
+    SetDefaultFeeRate(DecodedSetDefaultFeeRate),
+    SetDefaultProtocolFeeRate(DecodedSetDefaultProtocolFeeRate),
+    SetFeeAuthority(DecodedSetFeeAuthority),
+    SetFeeRate(DecodedSetFeeRate),
+    SetProtocolFeeRate(DecodedSetProtocolFeeRate),
+    SetRewardAuthority(DecodedSetRewardAuthority),
+    SetRewardAuthorityBySuperAuthority(DecodedSetRewardAuthorityBySuperAuthority),
+    SetRewardEmissions(DecodedSetRewardEmissions),
+    SetRewardEmissionsSuperAuthority(DecodedSetRewardEmissionsSuperAuthority),
+    Swap(DecodedSwap),
+    TwoHopSwap(DecodedTwoHopSwap),
+    UpdateFeesAndRewards(DecodedUpdateFeesAndRewards),
+    CollectFeesV2(DecodedCollectFeesV2),
+    CollectProtocolFeesV2(DecodedCollectProtocolFeesV2),
+    CollectRewardV2(DecodedCollectRewardV2),
+    DecreaseLiquidityV2(DecodedDecreaseLiquidityV2),
+    IncreaseLiquidityV2(DecodedIncreaseLiquidityV2),
+    SwapV2(DecodedSwapV2),
+    TwoHopSwapV2(DecodedTwoHopSwapV2),
+    InitializePoolV2(DecodedInitializePoolV2),
+    InitializeRewardV2(DecodedInitializeRewardV2),
+    SetRewardEmissionsV2(DecodedSetRewardEmissionsV2),
+    InitializeConfigExtension(DecodedInitializeConfigExtension),
+    InitializeTokenBadge(DecodedInitializeTokenBadge),
+    DeleteTokenBadge(DecodedDeleteTokenBadge),
+    SetConfigExtensionAuthority(DecodedSetConfigExtensionAuthority),
+    SetTokenBadgeAuthority(DecodedSetTokenBadgeAuthority),
+    OpenPositionWithTokenExtensions(DecodedOpenPositionWithTokenExtensions),
+    ClosePositionWithTokenExtensions(DecodedClosePositionWithTokenExtensions),
 }
 
 impl serde::Serialize for DecodedInstruction {
-  fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-  where
-      S: serde::Serializer,
-  {
-    use serde::ser::SerializeStruct;
-    match self {
-      DecodedInstruction::ProgramDeployInstruction(instruction) => {
-        let mut state = serializer.serialize_struct("TransactionInstruction", 2)?;
-        state.serialize_field("name", "programDeploy")?;
-        state.serialize_field("payload", instruction)?;
-        state.end()
-      }
-      DecodedInstruction::WhirlpoolInstruction(instruction) => {
-          instruction.serialize(serializer)
-      }
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        match self {
+            DecodedInstruction::ProgramDeployInstruction(instruction) => {
+                let mut state = serializer.serialize_struct("TransactionInstruction", 2)?;
+                state.serialize_field("name", "programDeploy")?;
+                state.serialize_field("payload", instruction)?;
+                state.end()
+            }
+            DecodedInstruction::WhirlpoolInstruction(instruction) => {
+                instruction.serialize(serializer)
+            }
+        }
     }
-  }
 }
 
 impl<'de> serde::Deserialize<'de> for DecodedInstruction {
-  fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-  where
-      D: serde::Deserializer<'de>,
-  {
-    let value = serde_json::Value::deserialize(deserializer)?;
-    let name = value.get("name")
-        .and_then(|v| v.as_str())
-        .ok_or_else(|| serde::de::Error::missing_field("name"))?;
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let value = serde_json::Value::deserialize(deserializer)?;
+        let name = value
+            .get("name")
+            .and_then(|v| v.as_str())
+            .ok_or_else(|| serde::de::Error::missing_field("name"))?;
 
-    if name == "programDeploy" {
-        let payload = value.get("payload")
-            .ok_or_else(|| serde::de::Error::missing_field("payload"))?;
-        let instruction = DecodedProgramDeployInstruction::deserialize(payload)
-            .map_err(serde::de::Error::custom)?;
-        Ok(DecodedInstruction::ProgramDeployInstruction(instruction))
-    } else {
-        let instruction = DecodedWhirlpoolInstruction::deserialize(value)
-            .map_err(serde::de::Error::custom)?;
-        Ok(DecodedInstruction::WhirlpoolInstruction(instruction))
+        if name == "programDeploy" {
+            let payload = value
+                .get("payload")
+                .ok_or_else(|| serde::de::Error::missing_field("payload"))?;
+            let instruction = DecodedProgramDeployInstruction::deserialize(payload)
+                .map_err(serde::de::Error::custom)?;
+            Ok(DecodedInstruction::ProgramDeployInstruction(instruction))
+        } else {
+            let instruction = DecodedWhirlpoolInstruction::deserialize(value)
+                .map_err(serde::de::Error::custom)?;
+            Ok(DecodedInstruction::WhirlpoolInstruction(instruction))
+        }
     }
-  }
 }

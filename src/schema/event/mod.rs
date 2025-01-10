@@ -1,6 +1,6 @@
 pub mod definition;
 
-use crate::types::{Slot, BlockHeight, BlockTime, PubkeyString, SignatureString};
+use crate::types::{BlockHeight, BlockTime, PubkeyString, SignatureString, Slot};
 use definition::*;
 use serde_derive::{Deserialize, Serialize};
 

@@ -90,8 +90,8 @@ pub mod big_decimal_as_string {
 }
 
 pub mod vec_u8_as_base64_string {
-    use serde::de;
     use base64::prelude::{Engine as _, BASE64_STANDARD};
+    use serde::de;
 
     pub fn serialize<S>(data: &Vec<u8>, serializer: S) -> Result<S::Ok, S::Error>
     where

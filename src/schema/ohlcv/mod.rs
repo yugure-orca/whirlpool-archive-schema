@@ -1,6 +1,6 @@
-use serde_derive::{Deserialize, Serialize};
 use crate::serde::{big_decimal_as_string, u128_as_string, u64_as_string};
-use crate::types::{PubkeyString, DecimalPrice, TokenDecimals, Slot, BlockTime};
+use crate::types::{BlockTime, DecimalPrice, PubkeyString, Slot, TokenDecimals};
+use serde_derive::{Deserialize, Serialize};
 
 /*
 
@@ -82,141 +82,141 @@ Each line is a JSON object with the following schema:
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvDailyData {
-  #[serde(flatten)]
-  pub metadata: OhlcvMetadata,
-  #[serde(rename = "is")]
-  pub initial_state: InitialState,
-  #[serde(rename = "ef")]
-  pub estimated_fees: EstimatedFees,
-  #[serde(rename = "d")]
-  pub daily: OhlcvData,
+    #[serde(flatten)]
+    pub metadata: OhlcvMetadata,
+    #[serde(rename = "is")]
+    pub initial_state: InitialState,
+    #[serde(rename = "ef")]
+    pub estimated_fees: EstimatedFees,
+    #[serde(rename = "d")]
+    pub daily: OhlcvData,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvMinutelyData {
-  #[serde(flatten)]
-  pub metadata: OhlcvMetadata,
-  #[serde(rename = "is")]
-  pub initial_state: InitialState,
-  #[serde(rename = "ef")]
-  pub estimated_fees: EstimatedFees,
-  #[serde(rename = "d")]
-  pub daily: OhlcvData,
-  #[serde(rename = "m")]
-  pub minutely: Vec<OhlcvData>,
+    #[serde(flatten)]
+    pub metadata: OhlcvMetadata,
+    #[serde(rename = "is")]
+    pub initial_state: InitialState,
+    #[serde(rename = "ef")]
+    pub estimated_fees: EstimatedFees,
+    #[serde(rename = "d")]
+    pub daily: OhlcvData,
+    #[serde(rename = "m")]
+    pub minutely: Vec<OhlcvData>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct OhlcvMetadata {
-  #[serde(rename = "w")]
-  pub whirlpool: PubkeyString,
-  #[serde(rename = "wc")]
-  pub whirlpools_config: PubkeyString,
-  #[serde(rename = "ta")]
-  pub token_a: TokenData,
-  #[serde(rename = "tb")]
-  pub token_b: TokenData,
-  #[serde(rename = "ts")]
-  pub tick_spacing: u16,
+    #[serde(rename = "w")]
+    pub whirlpool: PubkeyString,
+    #[serde(rename = "wc")]
+    pub whirlpools_config: PubkeyString,
+    #[serde(rename = "ta")]
+    pub token_a: TokenData,
+    #[serde(rename = "tb")]
+    pub token_b: TokenData,
+    #[serde(rename = "ts")]
+    pub tick_spacing: u16,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct TokenData {
-  #[serde(rename = "m")]
-  pub mint: PubkeyString,
-  #[serde(rename = "d")]
-  pub decimals: TokenDecimals,
+    #[serde(rename = "m")]
+    pub mint: PubkeyString,
+    #[serde(rename = "d")]
+    pub decimals: TokenDecimals,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(tag = "t", content = "p")]
 pub enum InitialState {
-  #[serde(rename = "e")]
-  Existing {
-    #[serde(rename = "pcsp", with = "u128_as_string")]
-    previous_close_sqrt_price: u128,
-    #[serde(rename = "pcdp", with = "big_decimal_as_string")]
-    previous_close_decimal_price: DecimalPrice,
-  },
-  #[serde(rename = "n")]
-  New {
-    #[serde(rename = "isp", with = "u128_as_string")]
-    initial_sqrt_price: u128,
-    #[serde(rename = "idp", with = "big_decimal_as_string")]
-    initial_decimal_price: DecimalPrice,
-    #[serde(rename = "is")]
-    initialized_slot: Slot,
-    #[serde(rename = "ibt")]
-    initialized_block_time: BlockTime,
-  },
+    #[serde(rename = "e")]
+    Existing {
+        #[serde(rename = "pcsp", with = "u128_as_string")]
+        previous_close_sqrt_price: u128,
+        #[serde(rename = "pcdp", with = "big_decimal_as_string")]
+        previous_close_decimal_price: DecimalPrice,
+    },
+    #[serde(rename = "n")]
+    New {
+        #[serde(rename = "isp", with = "u128_as_string")]
+        initial_sqrt_price: u128,
+        #[serde(rename = "idp", with = "big_decimal_as_string")]
+        initial_decimal_price: DecimalPrice,
+        #[serde(rename = "is")]
+        initialized_slot: Slot,
+        #[serde(rename = "ibt")]
+        initialized_block_time: BlockTime,
+    },
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct EstimatedFees {
-  #[serde(rename = "lpfa", with = "u64_as_string")]
-  pub liquidity_provider_fee_a: u64,
-  #[serde(rename = "lpfb", with = "u64_as_string")]
-  pub liquidity_provider_fee_b: u64,
-  #[serde(rename = "pfa", with = "u64_as_string")]
-  pub protocol_fee_a: u64,
-  #[serde(rename = "pfb", with = "u64_as_string")]
-  pub protocol_fee_b: u64,
+    #[serde(rename = "lpfa", with = "u64_as_string")]
+    pub liquidity_provider_fee_a: u64,
+    #[serde(rename = "lpfb", with = "u64_as_string")]
+    pub liquidity_provider_fee_b: u64,
+    #[serde(rename = "pfa", with = "u64_as_string")]
+    pub protocol_fee_a: u64,
+    #[serde(rename = "pfb", with = "u64_as_string")]
+    pub protocol_fee_b: u64,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct OhlcvData {
-  #[serde(rename = "t")]
-  pub timestamp: BlockTime,
-  #[serde(rename = "p")]
-  pub ohlc: PriceData,
-  #[serde(rename = "v")]
-  pub volume: VolumeData,
+    #[serde(rename = "t")]
+    pub timestamp: BlockTime,
+    #[serde(rename = "p")]
+    pub ohlc: PriceData,
+    #[serde(rename = "v")]
+    pub volume: VolumeData,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct PriceData {
-  #[serde(rename = "sp")]
-  pub sqrt_price: SqrtPriceData,
-  #[serde(rename = "dp")]
-  pub decimal_price: DecimalPriceData,
+    #[serde(rename = "sp")]
+    pub sqrt_price: SqrtPriceData,
+    #[serde(rename = "dp")]
+    pub decimal_price: DecimalPriceData,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct SqrtPriceData {
-  #[serde(rename = "o", with = "u128_as_string")]
-  pub open: u128,
-  #[serde(rename = "h", with = "u128_as_string")]
-  pub high: u128,
-  #[serde(rename = "l", with = "u128_as_string")]
-  pub low: u128,
-  #[serde(rename = "c", with = "u128_as_string")]
-  pub close: u128,
+    #[serde(rename = "o", with = "u128_as_string")]
+    pub open: u128,
+    #[serde(rename = "h", with = "u128_as_string")]
+    pub high: u128,
+    #[serde(rename = "l", with = "u128_as_string")]
+    pub low: u128,
+    #[serde(rename = "c", with = "u128_as_string")]
+    pub close: u128,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct DecimalPriceData {
-  #[serde(rename = "o", with = "big_decimal_as_string")]
-  pub open: DecimalPrice,
-  #[serde(rename = "h", with = "big_decimal_as_string")]
-  pub high: DecimalPrice,
-  #[serde(rename = "l", with = "big_decimal_as_string")]
-  pub low: DecimalPrice,
-  #[serde(rename = "c", with = "big_decimal_as_string")]
-  pub close: DecimalPrice,
+    #[serde(rename = "o", with = "big_decimal_as_string")]
+    pub open: DecimalPrice,
+    #[serde(rename = "h", with = "big_decimal_as_string")]
+    pub high: DecimalPrice,
+    #[serde(rename = "l", with = "big_decimal_as_string")]
+    pub low: DecimalPrice,
+    #[serde(rename = "c", with = "big_decimal_as_string")]
+    pub close: DecimalPrice,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct VolumeData {
-  pub ab: VolumeDirectionData,
-  pub ba: VolumeDirectionData,
+    pub ab: VolumeDirectionData,
+    pub ba: VolumeDirectionData,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct VolumeDirectionData {
-  #[serde(rename = "ti", with = "u128_as_string")]
-  pub total_in: u128,
-  #[serde(rename = "to", with = "u128_as_string")]
-  pub total_out: u128,
-  #[serde(rename = "c")]
-  pub count: u64,
+    #[serde(rename = "ti", with = "u128_as_string")]
+    pub total_in: u128,
+    #[serde(rename = "to", with = "u128_as_string")]
+    pub total_out: u128,
+    #[serde(rename = "c")]
+    pub count: u64,
 }

@@ -1,6 +1,6 @@
-use crate::serde::big_decimal_as_string;
 use super::position_opened::PositionType;
-use crate::types::{PubkeyString, DecimalPrice};
+use crate::serde::big_decimal_as_string;
+use crate::types::{DecimalPrice, PubkeyString};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
