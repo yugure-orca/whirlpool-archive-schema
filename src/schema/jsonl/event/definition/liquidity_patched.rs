@@ -1,4 +1,4 @@
-use whirlpool_archive_serde::string_u128;
+use crate::serde::u128_as_string;
 use super::PubkeyString;
 use serde_derive::{Deserialize, Serialize};
 
@@ -11,12 +11,12 @@ pub struct LiquidityPatchedEventPayload {
     #[serde(rename = "w")]
     pub whirlpool: PubkeyString,
 
-    #[serde(rename = "ld", with = "string_u128")]
+    #[serde(rename = "ld", with = "u128_as_string")]
     pub liquidity_delta: u128,
 
-    #[serde(rename = "owl", with = "string_u128")]
+    #[serde(rename = "owl", with = "u128_as_string")]
     pub old_whirlpool_liquidity: u128,
-    #[serde(rename = "nwl", with = "string_u128")]
+    #[serde(rename = "nwl", with = "u128_as_string")]
     pub new_whirlpool_liquidity: u128,
 }
 

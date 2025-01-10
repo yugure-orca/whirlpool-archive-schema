@@ -1,4 +1,4 @@
-pub mod string_u64 {
+pub mod u64_as_string {
     use serde::{self, Deserialize, Deserializer, Serializer};
     use std::str::FromStr;
 
@@ -18,7 +18,7 @@ pub mod string_u64 {
     }
 }
 
-pub mod string_u128 {
+pub mod u128_as_string {
     use serde::{self, Deserialize, Deserializer, Serializer};
     use std::str::FromStr;
 
@@ -38,7 +38,7 @@ pub mod string_u128 {
     }
 }
 
-pub mod string_option_u64 {
+pub mod option_u64_as_string {
     use serde::{self, Deserialize, Deserializer, Serializer};
     use std::str::FromStr;
 
@@ -62,7 +62,7 @@ pub mod string_option_u64 {
     }
 }
 
-pub mod string_decimal_price {
+pub mod big_decimal_as_string {
     use bigdecimal::BigDecimal;
     use serde::{self, Deserialize, Deserializer, Serializer};
     use std::str::FromStr;
@@ -89,7 +89,7 @@ pub mod string_decimal_price {
     }
 }
 
-pub mod string_base64_vec_u8 {
+pub mod vec_u8_as_base64_string {
     use serde::de;
     use base64::prelude::{Engine as _, BASE64_STANDARD};
 
@@ -113,7 +113,7 @@ pub mod string_base64_vec_u8 {
     }
 }
 
-pub mod u8_bool {
+pub mod bool_as_u8 {
     use serde::de;
     use serde::Serializer;
 

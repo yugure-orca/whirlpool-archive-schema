@@ -1,12 +1,13 @@
-use whirlpool_archive_serde::string_decimal_price;
+use crate::serde::big_decimal_as_string;
+use super::position_opened::PositionType;
 use super::{DecimalPrice, PubkeyString};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct PositionOpenedEventPayload {
+pub struct PositionClosedEventPayload {
     // origin
     #[serde(rename = "o")]
-    pub origin: PositionOpenedEventOrigin,
+    pub origin: PositionClosedEventOrigin,
 
     #[serde(rename = "w")]
     pub whirlpool: PubkeyString,
@@ -17,9 +18,9 @@ pub struct PositionOpenedEventPayload {
     pub lower_tick_index: i32,
     #[serde(rename = "uti")]
     pub upper_tick_index: i32,
-    #[serde(rename = "ldp", with = "string_decimal_price")]
+    #[serde(rename = "ldp", with = "big_decimal_as_string")]
     pub lower_decimal_price: DecimalPrice,
-    #[serde(rename = "udp", with = "string_decimal_price")]
+    #[serde(rename = "udp", with = "big_decimal_as_string")]
     pub upper_decimal_price: DecimalPrice,
 
     #[serde(rename = "pa")]
@@ -43,21 +44,11 @@ pub struct PositionOpenedEventPayload {
 
 #[allow(clippy::enum_variant_names)]
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub enum PositionOpenedEventOrigin {
-    #[serde(rename = "op")]
-    OpenPosition,
-    #[serde(rename = "opwm")]
-    OpenPositionWithMetadata,
-    #[serde(rename = "obp")]
-    OpenBundledPosition,
-    #[serde(rename = "opwte")]
-    OpenPositionWithTokenExtensions,
-}
-
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub enum PositionType {
-    #[serde(rename = "p")]
-    Position,
-    #[serde(rename = "bp")]
-    BundledPosition,
+pub enum PositionClosedEventOrigin {
+    #[serde(rename = "cp")]
+    ClosePosition,
+    #[serde(rename = "cbp")]
+    CloseBundledPosition,
+    #[serde(rename = "cpwte")]
+    ClosePositionWithTokenExtensions,
 }

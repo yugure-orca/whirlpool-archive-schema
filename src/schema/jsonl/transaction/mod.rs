@@ -1,5 +1,5 @@
 use serde_derive::{Deserialize, Serialize};
-use whirlpool_archive_serde::{string_base64_vec_u8, string_u64};
+use crate::serde::{vec_u8_as_base64_string, u64_as_string};
 
 mod definition;
 pub use definition::*;
@@ -60,9 +60,9 @@ pub struct Transaction {
 #[serde(rename_all = "camelCase")]
 pub struct TransactionBalance {
   pub account: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub pre: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub post: u64,
 }
 
@@ -76,7 +76,7 @@ pub enum TransactionInstruction {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedProgramDeployInstruction {
-  #[serde(with = "string_base64_vec_u8")]
+  #[serde(with = "vec_u8_as_base64_string")]
   pub program_data: Vec<u8>,
 }
 

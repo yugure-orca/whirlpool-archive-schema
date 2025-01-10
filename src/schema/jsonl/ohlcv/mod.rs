@@ -1,5 +1,5 @@
 use serde_derive::Serialize;
-use whirlpool_archive_serde::{string_decimal_price, string_u128, string_u64};
+use crate::serde::{big_decimal_as_string, u128_as_string, u64_as_string};
 
 /*
 
@@ -136,16 +136,16 @@ pub struct TokenData {
 pub enum InitialState {
   #[serde(rename = "e")]
   Existing {
-    #[serde(rename = "pcsp", with = "string_u128")]
+    #[serde(rename = "pcsp", with = "u128_as_string")]
     previous_close_sqrt_price: u128,
-    #[serde(rename = "pcdp", with = "string_decimal_price")]
+    #[serde(rename = "pcdp", with = "big_decimal_as_string")]
     previous_close_decimal_price: DecimalPrice,
   },
   #[serde(rename = "n")]
   New {
-    #[serde(rename = "isp", with = "string_u128")]
+    #[serde(rename = "isp", with = "u128_as_string")]
     initial_sqrt_price: u128,
-    #[serde(rename = "idp", with = "string_decimal_price")]
+    #[serde(rename = "idp", with = "big_decimal_as_string")]
     initial_decimal_price: DecimalPrice,
     #[serde(rename = "is")]
     initialized_slot: u64,
@@ -156,13 +156,13 @@ pub enum InitialState {
 
 #[derive(Serialize, Debug, PartialEq, Eq)]
 pub struct EstimatedFees {
-  #[serde(rename = "lpfa", with = "string_u64")]
+  #[serde(rename = "lpfa", with = "u64_as_string")]
   pub liquidity_provider_fee_a: u64,
-  #[serde(rename = "lpfb", with = "string_u64")]
+  #[serde(rename = "lpfb", with = "u64_as_string")]
   pub liquidity_provider_fee_b: u64,
-  #[serde(rename = "pfa", with = "string_u64")]
+  #[serde(rename = "pfa", with = "u64_as_string")]
   pub protocol_fee_a: u64,
-  #[serde(rename = "pfb", with = "string_u64")]
+  #[serde(rename = "pfb", with = "u64_as_string")]
   pub protocol_fee_b: u64,
 }
 
@@ -186,25 +186,25 @@ pub struct WhirlpoolOhlcvData {
 
 #[derive(Serialize, Debug, PartialEq, Eq)]
 pub struct SqrtPriceData {
-  #[serde(rename = "o", with = "string_u128")]
+  #[serde(rename = "o", with = "u128_as_string")]
   pub open: u128,
-  #[serde(rename = "h", with = "string_u128")]
+  #[serde(rename = "h", with = "u128_as_string")]
   pub high: u128,
-  #[serde(rename = "l", with = "string_u128")]
+  #[serde(rename = "l", with = "u128_as_string")]
   pub low: u128,
-  #[serde(rename = "c", with = "string_u128")]
+  #[serde(rename = "c", with = "u128_as_string")]
   pub close: u128,
 }
 
 #[derive(Serialize, Debug, PartialEq, Eq)]
 pub struct DecimalPriceData {
-  #[serde(rename = "o", with = "string_decimal_price")]
+  #[serde(rename = "o", with = "big_decimal_as_string")]
   pub open: DecimalPrice,
-  #[serde(rename = "h", with = "string_decimal_price")]
+  #[serde(rename = "h", with = "big_decimal_as_string")]
   pub high: DecimalPrice,
-  #[serde(rename = "l", with = "string_decimal_price")]
+  #[serde(rename = "l", with = "big_decimal_as_string")]
   pub low: DecimalPrice,
-  #[serde(rename = "c", with = "string_decimal_price")]
+  #[serde(rename = "c", with = "big_decimal_as_string")]
   pub close: DecimalPrice,
 }
 
@@ -216,9 +216,9 @@ pub struct VolumeData {
 
 #[derive(Serialize, Debug, PartialEq, Eq)]
 pub struct VolumeDirectionData {
-  #[serde(rename = "ti", with = "string_u128")]
+  #[serde(rename = "ti", with = "u128_as_string")]
   pub total_in: u128,
-  #[serde(rename = "to", with = "string_u128")]
+  #[serde(rename = "to", with = "u128_as_string")]
   pub total_out: u128,
   #[serde(rename = "c")]
   pub count: u64,

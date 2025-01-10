@@ -1,4 +1,4 @@
-use whirlpool_archive_serde::{string_decimal_price, string_u128};
+use crate::serde::{big_decimal_as_string, u128_as_string};
 use super::{DecimalPrice, Decimals, PubkeyString, TokenProgram};
 use serde_derive::{Deserialize, Serialize};
 
@@ -10,9 +10,9 @@ pub struct PoolInitializedEventPayload {
 
     #[serde(rename = "ts")]
     pub tick_spacing: u16,
-    #[serde(rename = "sp", with = "string_u128")]
+    #[serde(rename = "sp", with = "u128_as_string")]
     pub sqrt_price: u128,
-    #[serde(rename = "dp", with = "string_decimal_price")]
+    #[serde(rename = "dp", with = "big_decimal_as_string")]
     pub decimal_price: DecimalPrice,
 
     #[serde(rename = "c")]

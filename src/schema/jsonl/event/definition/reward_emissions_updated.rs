@@ -1,4 +1,4 @@
-use whirlpool_archive_serde::string_u128;
+use crate::serde::u128_as_string;
 use super::{Decimals, PubkeyString};
 use serde_derive::{Deserialize, Serialize};
 
@@ -20,10 +20,10 @@ pub struct RewardEmissionsUpdatedEventPayload {
     #[serde(rename = "rd")]
     pub reward_decimals: Decimals,
 
-    #[serde(rename = "oepsx64", with = "string_u128")]
+    #[serde(rename = "oepsx64", with = "u128_as_string")]
     pub old_emissions_per_second_x64: u128,
 
-    #[serde(rename = "nepsx64", with = "string_u128")]
+    #[serde(rename = "nepsx64", with = "u128_as_string")]
     pub new_emissions_per_second_x64: u128,
 }
 

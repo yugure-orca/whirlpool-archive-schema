@@ -1,10 +1,10 @@
 use serde_derive::{Deserialize, Serialize};
-use whirlpool_archive_serde::{string_u128, string_u64, u8_bool};
+use crate::serde::{u128_as_string, u64_as_string, bool_as_u8};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedAdminIncreaseLiquidity {
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_liquidity: u128,
   pub key_whirlpools_config: String,
   pub key_whirlpool: String,
@@ -45,9 +45,9 @@ pub struct DecodedCollectFees {
   pub key_token_owner_account_b: String,
   pub key_token_vault_b: String,
   pub key_token_program: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_0: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_1: u64,
 }
 
@@ -62,9 +62,9 @@ pub struct DecodedCollectProtocolFees {
   pub key_token_destination_a: String,
   pub key_token_destination_b: String,
   pub key_token_program: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_0: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_1: u64,
 }
 
@@ -79,18 +79,18 @@ pub struct DecodedCollectReward {
   pub key_reward_owner_account: String,
   pub key_reward_vault: String,
   pub key_token_program: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_0: u64,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedDecreaseLiquidity {
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_liquidity_amount: u128,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_min_a: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_min_b: u64,
   pub key_whirlpool: String,
   pub key_token_program: String,
@@ -103,9 +103,9 @@ pub struct DecodedDecreaseLiquidity {
   pub key_token_vault_b: String,
   pub key_tick_array_lower: String,
   pub key_tick_array_upper: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_0: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_1: u64,
 }
 
@@ -123,11 +123,11 @@ pub struct DecodedDeletePositionBundle {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedIncreaseLiquidity {
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_liquidity_amount: u128,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_max_a: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_max_b: u64,
   pub key_whirlpool: String,
   pub key_token_program: String,
@@ -140,9 +140,9 @@ pub struct DecodedIncreaseLiquidity {
   pub key_token_vault_b: String,
   pub key_tick_array_lower: String,
   pub key_tick_array_upper: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_0: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_1: u64,
 }
 
@@ -174,7 +174,7 @@ pub struct DecodedInitializeFeeTier {
 #[serde(rename_all = "camelCase")]
 pub struct DecodedInitializePool {
   pub data_tick_spacing: u16,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_initial_sqrt_price: u128,
   pub key_whirlpools_config: String,
   pub key_token_mint_a: String,
@@ -377,7 +377,7 @@ pub struct DecodedSetRewardAuthorityBySuperAuthority {
 #[serde(rename_all = "camelCase")]
 pub struct DecodedSetRewardEmissions {
   pub data_reward_index: u8,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_emissions_per_second_x64: u128,
   pub key_whirlpool: String,
   pub key_reward_authority: String,
@@ -395,15 +395,15 @@ pub struct DecodedSetRewardEmissionsSuperAuthority {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedSwap {
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_amount: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_other_amount_threshold: u64,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_sqrt_price_limit: u128,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_amount_specified_is_input: bool,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_a_to_b: bool,
   pub key_token_program: String,
   pub key_token_authority: String,
@@ -416,28 +416,28 @@ pub struct DecodedSwap {
   pub key_tick_array_1: String,
   pub key_tick_array_2: String,
   pub key_oracle: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_0: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_1: u64,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedTwoHopSwap {
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_amount: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_other_amount_threshold: u64,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_amount_specified_is_input: bool,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_a_to_b_one: bool,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_a_to_b_two: bool,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_sqrt_price_limit_one: u128,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_sqrt_price_limit_two: u128,
   pub key_token_program: String,
   pub key_token_authority: String,
@@ -459,13 +459,13 @@ pub struct DecodedTwoHopSwap {
   pub key_tick_array_two_2: String,
   pub key_oracle_one: String,
   pub key_oracle_two: String,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_0: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_1: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_2: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_amount_3: u64,
 }
 
@@ -542,11 +542,11 @@ pub struct DecodedCollectRewardV2 {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedDecreaseLiquidityV2 {
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_liquidity_amount: u128,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_min_a: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_min_b: u64,
   pub key_whirlpool: String,
   pub key_token_program_a: String,
@@ -572,11 +572,11 @@ pub struct DecodedDecreaseLiquidityV2 {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedIncreaseLiquidityV2 {
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_liquidity_amount: u128,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_max_a: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_token_amount_max_b: u64,
   pub key_whirlpool: String,
   pub key_token_program_a: String,
@@ -602,15 +602,15 @@ pub struct DecodedIncreaseLiquidityV2 {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedSwapV2 {
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_amount: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_other_amount_threshold: u64,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_sqrt_price_limit: u128,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_amount_specified_is_input: bool,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_a_to_b: bool,
   pub key_token_program_a: String,
   pub key_token_program_b: String,
@@ -636,19 +636,19 @@ pub struct DecodedSwapV2 {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct DecodedTwoHopSwapV2 {
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_amount: u64,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub data_other_amount_threshold: u64,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_amount_specified_is_input: bool,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_a_to_b_one: bool,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_a_to_b_two: bool,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_sqrt_price_limit_one: u128,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_sqrt_price_limit_two: u128,
   pub key_whirlpool_one: String,
   pub key_whirlpool_two: String,
@@ -685,7 +685,7 @@ pub struct DecodedTwoHopSwapV2 {
 #[serde(rename_all = "camelCase")]
 pub struct DecodedInitializePoolV2 {
   pub data_tick_spacing: u16,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_initial_sqrt_price: u128,
   pub key_whirlpools_config: String,
   pub key_token_mint_a: String,
@@ -728,7 +728,7 @@ pub struct DecodedInitializeRewardV2 {
 #[serde(rename_all = "camelCase")]
 pub struct DecodedSetRewardEmissionsV2 {
   pub data_reward_index: u8,
-  #[serde(with = "string_u128")]
+  #[serde(with = "u128_as_string")]
   pub data_emissions_per_second_x64: u128,
   pub key_whirlpool: String,
   pub key_reward_authority: String,
@@ -791,7 +791,7 @@ pub struct DecodedSetTokenBadgeAuthority {
 pub struct DecodedOpenPositionWithTokenExtensions {
   pub data_tick_lower_index: i32,
   pub data_tick_upper_index: i32,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub data_with_token_metadata_extension: bool,
   pub key_funder: String,
   pub key_owner: String,
@@ -825,11 +825,11 @@ pub type RemainingAccountsKeys = Vec<String>;
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct TransferAmountWithTransferFeeConfig {
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub amount: u64,
-  #[serde(with = "u8_bool")]
+  #[serde(with = "bool_as_u8")]
   pub transfer_fee_config_opt: bool,
   pub transfer_fee_config_bps: u16,
-  #[serde(with = "string_u64")]
+  #[serde(with = "u64_as_string")]
   pub transfer_fee_config_max: u64,
 }

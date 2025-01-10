@@ -57,7 +57,7 @@ pub use traded::*;
 mod program_deployed;
 pub use program_deployed::*;
 
-use whirlpool_archive_serde::{string_option_u64, string_u64};
+use crate::serde::{option_u64_as_string, u64_as_string};
 use bigdecimal::BigDecimal;
 use serde_derive::{Deserialize, Serialize};
 
@@ -70,7 +70,7 @@ pub struct TransferInfo {
     #[serde(rename = "m")]
     pub mint: PubkeyString,
 
-    #[serde(rename = "a", with = "string_u64")]
+    #[serde(rename = "a", with = "u64_as_string")]
     pub amount: u64,
 
     #[serde(rename = "d")]
@@ -86,7 +86,7 @@ pub struct TransferInfo {
         rename = "tfm",
         skip_serializing_if = "Option::is_none",
         default = "Option::default",
-        with = "string_option_u64"
+        with = "option_u64_as_string"
     )]
     pub transfer_fee_max: Option<u64>,
 }

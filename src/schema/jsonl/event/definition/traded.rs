@@ -1,4 +1,4 @@
-use whirlpool_archive_serde::{string_decimal_price, string_u128};
+use crate::serde::{big_decimal_as_string, u128_as_string};
 use super::{DecimalPrice, PubkeyString, TransferInfo};
 use serde_derive::{Deserialize, Serialize};
 
@@ -25,17 +25,17 @@ pub struct TradedEventPayload {
     pub transfer_out: TransferInfo,
 
     // pool state
-    #[serde(rename = "osp", with = "string_u128")]
+    #[serde(rename = "osp", with = "u128_as_string")]
     pub old_sqrt_price: u128,
-    #[serde(rename = "nsp", with = "string_u128")]
+    #[serde(rename = "nsp", with = "u128_as_string")]
     pub new_sqrt_price: u128,
     #[serde(rename = "octi")]
     pub old_current_tick_index: i32,
     #[serde(rename = "ncti")]
     pub new_current_tick_index: i32,
-    #[serde(rename = "odp", with = "string_decimal_price")]
+    #[serde(rename = "odp", with = "big_decimal_as_string")]
     pub old_decimal_price: DecimalPrice,
-    #[serde(rename = "ndp", with = "string_decimal_price")]
+    #[serde(rename = "ndp", with = "big_decimal_as_string")]
     pub new_decimal_price: DecimalPrice,
     #[serde(rename = "fr")]
     pub fee_rate: u16,

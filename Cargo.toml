@@ -1,22 +1,11 @@
-[workspace]
-members = [
-  "whirlpool-archive-serde",
-  "whirlpool-transaction",
-  "whirlpool-event",
-  "whirlpool-ohlcv",
-]
-
-resolver = "2"
-
-[workspace.package]
-version = "0.0.1"
+[package]
+name = "whirlpool-archives"
+version = "0.1.0"
 edition = "2021"
 
-[workspace.dependencies]
+[dependencies]
 serde = "1.0.188"
 serde_derive = "1.0.188"
 serde_json = { version = "1.0.107", features = ["preserve_order"] }
 base64 = "0.21.4"
 bigdecimal = "0.4.5"
-
-whirlpool-archive-serde = { path = "./whirlpool-archive-serde" }
