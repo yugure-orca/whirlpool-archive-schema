@@ -43,22 +43,22 @@ pub struct WhirlpoolTransactionBlock {
   pub slot: Slot,
   pub block_height: BlockHeight,
   pub block_time: BlockTime,
-  pub transactions: Vec<Transaction>,
+  pub transactions: Vec<WhirlpoolTransaction>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
-pub struct Transaction {
+pub struct WhirlpoolTransaction {
   pub index: u32,
   pub signature: SignatureString,
   pub payer: PubkeyString,
-  pub balances: Vec<TransactionBalance>,
-  pub instructions: Vec<TransactionInstruction>,
+  pub balances: Vec<BalanceChange>,
+  pub instructions: Vec<DecodedInstruction>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
-pub struct TransactionBalance {
+pub struct BalanceChange {
   pub account: PubkeyString,
   #[serde(with = "u64_as_string")]
   pub pre: u64,
@@ -68,7 +68,7 @@ pub struct TransactionBalance {
 
 #[allow(clippy::large_enum_variant)]
 #[derive(Debug, PartialEq, Eq, Clone)]
-pub enum TransactionInstruction {
+pub enum DecodedInstruction {
   ProgramDeployInstruction(DecodedProgramDeployInstruction),
   WhirlpoolInstruction(DecodedWhirlpoolInstruction),
 }
@@ -81,7 +81,7 @@ pub struct DecodedProgramDeployInstruction {
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-#[serde(tag = "name", content = "payload")]
+#[serde(rename_all = "camelCase", tag = "name", content = "payload")]
 pub enum DecodedWhirlpoolInstruction {
   AdminIncreaseLiquidity(DecodedAdminIncreaseLiquidity),
   CloseBundledPosition(DecodedCloseBundledPosition),
@@ -134,27 +134,27 @@ pub enum DecodedWhirlpoolInstruction {
   ClosePositionWithTokenExtensions(DecodedClosePositionWithTokenExtensions),
 }
 
-impl serde::Serialize for TransactionInstruction {
+impl serde::Serialize for DecodedInstruction {
   fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
   where
       S: serde::Serializer,
   {
     use serde::ser::SerializeStruct;
     match self {
-      TransactionInstruction::ProgramDeployInstruction(instruction) => {
+      DecodedInstruction::ProgramDeployInstruction(instruction) => {
         let mut state = serializer.serialize_struct("TransactionInstruction", 2)?;
         state.serialize_field("name", "programDeploy")?;
         state.serialize_field("payload", instruction)?;
         state.end()
       }
-      TransactionInstruction::WhirlpoolInstruction(instruction) => {
+      DecodedInstruction::WhirlpoolInstruction(instruction) => {
           instruction.serialize(serializer)
       }
     }
   }
 }
 
-impl<'de> serde::Deserialize<'de> for TransactionInstruction {
+impl<'de> serde::Deserialize<'de> for DecodedInstruction {
   fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
   where
       D: serde::Deserializer<'de>,
@@ -165,16 +165,15 @@ impl<'de> serde::Deserialize<'de> for TransactionInstruction {
         .ok_or_else(|| serde::de::Error::missing_field("name"))?;
 
     if name == "programDeploy" {
-        // ProgramDeployInstruction
         let payload = value.get("payload")
             .ok_or_else(|| serde::de::Error::missing_field("payload"))?;
         let instruction = DecodedProgramDeployInstruction::deserialize(payload)
             .map_err(serde::de::Error::custom)?;
-        Ok(TransactionInstruction::ProgramDeployInstruction(instruction))
+        Ok(DecodedInstruction::ProgramDeployInstruction(instruction))
     } else {
         let instruction = DecodedWhirlpoolInstruction::deserialize(value)
             .map_err(serde::de::Error::custom)?;
-        Ok(TransactionInstruction::WhirlpoolInstruction(instruction))
+        Ok(DecodedInstruction::WhirlpoolInstruction(instruction))
     }
   }
 }

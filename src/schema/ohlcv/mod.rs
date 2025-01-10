@@ -83,31 +83,31 @@ Each line is a JSON object with the following schema:
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvDailyData {
   #[serde(flatten)]
-  pub metadata: WhirlpoolOhlcvMetadata,
+  pub metadata: OhlcvMetadata,
   #[serde(rename = "is")]
   pub initial_state: InitialState,
   #[serde(rename = "ef")]
   pub estimated_fees: EstimatedFees,
   #[serde(rename = "d")]
-  pub daily: WhirlpoolOhlcvDataUnit,
+  pub daily: OhlcvData,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvMinutelyData {
   #[serde(flatten)]
-  pub metadata: WhirlpoolOhlcvMetadata,
+  pub metadata: OhlcvMetadata,
   #[serde(rename = "is")]
   pub initial_state: InitialState,
   #[serde(rename = "ef")]
   pub estimated_fees: EstimatedFees,
   #[serde(rename = "d")]
-  pub daily: WhirlpoolOhlcvDataUnit,
+  pub daily: OhlcvData,
   #[serde(rename = "m")]
-  pub minutely: Vec<WhirlpoolOhlcvDataUnit>,
+  pub minutely: Vec<OhlcvData>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct WhirlpoolOhlcvMetadata {
+pub struct OhlcvMetadata {
   #[serde(rename = "w")]
   pub whirlpool: PubkeyString,
   #[serde(rename = "wc")]
@@ -164,17 +164,17 @@ pub struct EstimatedFees {
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct WhirlpoolOhlcvDataUnit {
+pub struct OhlcvData {
   #[serde(rename = "t")]
   pub timestamp: BlockTime,
   #[serde(rename = "p")]
-  pub ohlc: WhirlpoolOhlcvData,
+  pub ohlc: PriceData,
   #[serde(rename = "v")]
   pub volume: VolumeData,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct WhirlpoolOhlcvData {
+pub struct PriceData {
   #[serde(rename = "sp")]
   pub sqrt_price: SqrtPriceData,
   #[serde(rename = "dp")]

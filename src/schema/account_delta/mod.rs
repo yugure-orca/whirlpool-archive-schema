@@ -4,7 +4,7 @@ use crate::serde::vec_u8_as_base64_string;
 
 /*
 
-Whirlpool Account Data Delta JSON Lines Format
+Whirlpool Account Delta JSON Lines Format
 
 To reduce data size, we use short field names.
 Each line is a JSON object with the following schema:
@@ -13,7 +13,7 @@ Each line is a JSON object with the following schema:
   slot(s): u64,
   blockHeight(h): u64,
   blockTime(t): i64,
-  accountDataDeltas(a): [
+  accountDeltas(a): [
     {
       pubkey(p): String(base58 encoding),
       accountType(t): String,
@@ -47,7 +47,7 @@ Each line is a JSON object with the following schema:
 */
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
-pub struct WhirlpoolAccountDataDeltaBlock {
+pub struct WhirlpoolAccountDeltaBlock {
     #[serde(rename = "s")]
     pub slot: Slot,
     #[serde(rename = "h")]
@@ -55,40 +55,40 @@ pub struct WhirlpoolAccountDataDeltaBlock {
     #[serde(rename = "t")]
     pub block_time: BlockTime,
     #[serde(rename = "a")]
-    pub account_data_deltas: Vec<WhirlpoolAccountDataDeltaInfo>,
+    pub account_deltas: Vec<WhirlpoolAccountDelta>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct WhirlpoolAccountDataDeltaInfo {
+pub struct WhirlpoolAccountDelta {
     #[serde(rename = "p")]
     pub pubkey: PubkeyString,
     #[serde(rename = "t")]
     pub account_type: WhirlpoolAccountType,
     #[serde(flatten)]
-    pub delta: WhirlpoolAccountDataDelta,
+    pub delta: AccountDataDelta,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(tag = "d")]
-pub enum WhirlpoolAccountDataDelta {
+pub enum AccountDataDelta {
     #[serde(rename = "I")]
     Initialized {
         #[serde(rename = "l")]
         length: u16,
         #[serde(rename = "s")]
-        segments: Vec<WhirlpoolAccountDataDeltaSegment>,
+        segments: Vec<AccountDataDeltaSegment>,
     },
     #[serde(rename = "U")]
     Updated {
         #[serde(rename = "s")]
-        segments: Vec<WhirlpoolAccountDataDeltaSegment>,
+        segments: Vec<AccountDataDeltaSegment>,
     },
     #[serde(rename = "C")]
     Closed,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub struct WhirlpoolAccountDataDeltaSegment {
+pub struct AccountDataDeltaSegment {
     #[serde(rename = "o")]
     pub offset: u16,
     #[serde(rename = "d", with = "vec_u8_as_base64_string")]

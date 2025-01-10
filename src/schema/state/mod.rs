@@ -27,14 +27,14 @@ pub struct WhirlpoolState {
   pub slot: Slot,
   pub block_height: BlockHeight,
   pub block_time: BlockTime,
-  pub accounts: Vec<WhirlpoolStateAccount>,
+  pub accounts: Vec<Account>,
   #[serde(with = "vec_u8_as_base64_string")]
   pub program_data: Bytes,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
-pub struct WhirlpoolStateAccount {
+pub struct Account {
   pub pubkey: PubkeyString,
   #[serde(with = "vec_u8_as_base64_string")]
   pub data: Bytes,
