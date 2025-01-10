@@ -1,6 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use crate::serde::{big_decimal_as_string, u128_as_string, u64_as_string};
-use crate::types::{PubkeyBase58String, DecimalPrice, Decimals};
+use crate::types::{PubkeyString, DecimalPrice, TokenDecimals};
 
 /*
 
@@ -109,9 +109,9 @@ pub struct WhirlpoolOhlcvMinutelyData {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvMetadata {
   #[serde(rename = "w")]
-  pub whirlpool: PubkeyBase58String,
+  pub whirlpool: PubkeyString,
   #[serde(rename = "wc")]
-  pub whirlpools_config: PubkeyBase58String,
+  pub whirlpools_config: PubkeyString,
   #[serde(rename = "ta")]
   pub token_a: TokenData,
   #[serde(rename = "tb")]
@@ -123,9 +123,9 @@ pub struct WhirlpoolOhlcvMetadata {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct TokenData {
   #[serde(rename = "m")]
-  pub mint: PubkeyBase58String,
+  pub mint: PubkeyString,
   #[serde(rename = "d")]
-  pub decimals: Decimals,
+  pub decimals: TokenDecimals,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

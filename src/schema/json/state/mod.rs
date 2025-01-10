@@ -1,5 +1,5 @@
 use serde_derive::{Deserialize, Serialize};
-use crate::{serde::vec_u8_as_base64_string, types::{Slot, BlockHeight, BlockTime, Bytes, PubkeyBase58String}};
+use crate::{serde::vec_u8_as_base64_string, types::{Slot, BlockHeight, BlockTime, Bytes, PubkeyString}};
 
 /*
 
@@ -35,7 +35,7 @@ pub struct WhirlpoolState {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct WhirlpoolStateAccount {
-  pub pubkey: PubkeyBase58String,
+  pub pubkey: PubkeyString,
   #[serde(with = "vec_u8_as_base64_string")]
   pub data: Bytes,
 }

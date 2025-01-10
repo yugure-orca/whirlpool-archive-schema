@@ -1,5 +1,5 @@
 use crate::serde::{big_decimal_as_string, u128_as_string};
-use crate::types::{PubkeyBase58String, DecimalPrice, Decimals};
+use crate::types::{PubkeyString, DecimalPrice, TokenDecimals};
 use super::TokenProgram;
 
 use serde_derive::{Deserialize, Serialize};
@@ -18,17 +18,17 @@ pub struct PoolInitializedEventPayload {
     pub decimal_price: DecimalPrice,
 
     #[serde(rename = "c")]
-    pub config: PubkeyBase58String,
+    pub config: PubkeyString,
     #[serde(rename = "tma")]
-    pub token_mint_a: PubkeyBase58String,
+    pub token_mint_a: PubkeyString,
     #[serde(rename = "tmb")]
-    pub token_mint_b: PubkeyBase58String,
+    pub token_mint_b: PubkeyString,
     #[serde(rename = "f")]
-    pub funder: PubkeyBase58String,
+    pub funder: PubkeyString,
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
     #[serde(rename = "ft")]
-    pub fee_tier: PubkeyBase58String,
+    pub fee_tier: PubkeyString,
 
     #[serde(rename = "tpa")]
     pub token_program_a: TokenProgram,
@@ -37,9 +37,9 @@ pub struct PoolInitializedEventPayload {
 
     // decimals
     #[serde(rename = "tda")]
-    pub token_decimals_a: Decimals,
+    pub token_decimals_a: TokenDecimals,
     #[serde(rename = "tdb")]
-    pub token_decimals_b: Decimals,
+    pub token_decimals_b: TokenDecimals,
 
     // pool state
     #[serde(rename = "cti")]

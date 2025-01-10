@@ -1,4 +1,4 @@
-use crate::types::PubkeyBase58String;
+use crate::types::PubkeyString;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,15 +8,15 @@ pub struct RewardAuthorityUpdatedEventPayload {
     pub origin: RewardAuthorityUpdatedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
 
     #[serde(rename = "ri")]
     pub reward_index: u8,
 
     #[serde(rename = "ora")]
-    pub old_reward_authority: PubkeyBase58String,
+    pub old_reward_authority: PubkeyString,
     #[serde(rename = "nra")]
-    pub new_reward_authority: PubkeyBase58String,
+    pub new_reward_authority: PubkeyString,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

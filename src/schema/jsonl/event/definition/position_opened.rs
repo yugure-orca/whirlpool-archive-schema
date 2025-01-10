@@ -1,5 +1,5 @@
 use crate::serde::big_decimal_as_string;
-use crate::types::{PubkeyBase58String, DecimalPrice};
+use crate::types::{PubkeyString, DecimalPrice};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -9,9 +9,9 @@ pub struct PositionOpenedEventPayload {
     pub origin: PositionOpenedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
     #[serde(rename = "p")]
-    pub position: PubkeyBase58String,
+    pub position: PubkeyString,
 
     #[serde(rename = "lti")]
     pub lower_tick_index: i32,
@@ -23,20 +23,20 @@ pub struct PositionOpenedEventPayload {
     pub upper_decimal_price: DecimalPrice,
 
     #[serde(rename = "pa")]
-    pub position_authority: PubkeyBase58String,
+    pub position_authority: PubkeyString,
 
     #[serde(rename = "pt")]
     pub position_type: PositionType,
 
     // position only
     #[serde(rename = "pm", skip_serializing_if = "Option::is_none")]
-    pub position_mint: Option<PubkeyBase58String>,
+    pub position_mint: Option<PubkeyString>,
 
     // bundled position only
     #[serde(rename = "pbm", skip_serializing_if = "Option::is_none")]
-    pub position_bundle_mint: Option<PubkeyBase58String>,
+    pub position_bundle_mint: Option<PubkeyString>,
     #[serde(rename = "pb", skip_serializing_if = "Option::is_none")]
-    pub position_bundle: Option<PubkeyBase58String>,
+    pub position_bundle: Option<PubkeyString>,
     #[serde(rename = "pbi", skip_serializing_if = "Option::is_none")]
     pub position_bundle_index: Option<u16>,
 }

@@ -1,5 +1,5 @@
 use serde_derive::{Deserialize, Serialize};
-use crate::types::{Slot, BlockHeight, BlockTime, PubkeyBase58String, Decimals};
+use crate::types::{Slot, BlockHeight, BlockTime, PubkeyString, TokenDecimals};
 
 /*
 
@@ -32,6 +32,6 @@ pub struct WhirlpoolToken {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct TokenInfo {
-  pub mint: PubkeyBase58String,
-  pub decimals: Decimals,
+  pub mint: PubkeyString,
+  pub decimals: TokenDecimals,
 }

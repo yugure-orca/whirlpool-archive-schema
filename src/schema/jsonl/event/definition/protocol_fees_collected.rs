@@ -1,5 +1,5 @@
 use super::TransferInfo;
-use crate::types::PubkeyBase58String;
+use crate::types::PubkeyString;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -9,11 +9,11 @@ pub struct ProtocolFeesCollectedEventPayload {
     pub origin: ProtocolFeesCollectedEventOrigin,
 
     #[serde(rename = "c")]
-    pub config: PubkeyBase58String,
+    pub config: PubkeyString,
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
     #[serde(rename = "cpfa")]
-    pub collect_protocol_fees_authority: PubkeyBase58String,
+    pub collect_protocol_fees_authority: PubkeyString,
 
     // transfer info
     #[serde(rename = "ta")]

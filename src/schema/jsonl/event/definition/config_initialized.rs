@@ -1,4 +1,4 @@
-use crate::types::PubkeyBase58String;
+use crate::types::PubkeyString;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,16 +8,16 @@ pub struct ConfigInitializedEventPayload {
     pub origin: ConfigInitializedEventOrigin,
 
     #[serde(rename = "c")]
-    pub config: PubkeyBase58String,
+    pub config: PubkeyString,
 
     #[serde(rename = "fa")]
-    pub fee_authority: PubkeyBase58String,
+    pub fee_authority: PubkeyString,
 
     #[serde(rename = "cpfa")]
-    pub collect_protocol_fees_authority: PubkeyBase58String,
+    pub collect_protocol_fees_authority: PubkeyString,
 
     #[serde(rename = "resa")]
-    pub reward_emissions_super_authority: PubkeyBase58String,
+    pub reward_emissions_super_authority: PubkeyString,
 
     #[serde(rename = "dpfr")]
     pub default_protocol_fee_rate: u16,

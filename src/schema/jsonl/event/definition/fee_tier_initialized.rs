@@ -1,4 +1,4 @@
-use crate::types::PubkeyBase58String;
+use crate::types::PubkeyString;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,10 +8,10 @@ pub struct FeeTierInitializedEventPayload {
     pub origin: FeeTierInitializedEventOrigin,
 
     #[serde(rename = "c")]
-    pub config: PubkeyBase58String,
+    pub config: PubkeyString,
 
     #[serde(rename = "ft")]
-    pub fee_tier: PubkeyBase58String,
+    pub fee_tier: PubkeyString,
 
     #[serde(rename = "ts")]
     pub tick_spacing: u16,

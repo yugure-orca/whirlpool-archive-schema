@@ -1,4 +1,4 @@
-use crate::types::PubkeyBase58String;
+use crate::types::PubkeyString;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,16 +8,16 @@ pub struct TokenBadgeDeletedEventPayload {
     pub origin: TokenBadgeDeletedEventOrigin,
 
     #[serde(rename = "c")]
-    pub config: PubkeyBase58String,
+    pub config: PubkeyString,
 
     #[serde(rename = "ce")]
-    pub config_extension: PubkeyBase58String,
+    pub config_extension: PubkeyString,
 
     #[serde(rename = "tm")]
-    pub token_mint: PubkeyBase58String,
+    pub token_mint: PubkeyString,
 
     #[serde(rename = "tb")]
-    pub token_badge: PubkeyBase58String,
+    pub token_badge: PubkeyString,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

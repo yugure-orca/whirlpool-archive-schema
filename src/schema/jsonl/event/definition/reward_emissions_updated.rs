@@ -1,5 +1,5 @@
 use crate::serde::u128_as_string;
-use crate::types::{PubkeyBase58String, Decimals};
+use crate::types::{PubkeyString, TokenDecimals};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -9,16 +9,16 @@ pub struct RewardEmissionsUpdatedEventPayload {
     pub origin: RewardEmissionsUpdatedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
 
     #[serde(rename = "ri")]
     pub reward_index: u8,
 
     #[serde(rename = "rm")]
-    pub reward_mint: PubkeyBase58String,
+    pub reward_mint: PubkeyString,
 
     #[serde(rename = "rd")]
-    pub reward_decimals: Decimals,
+    pub reward_decimals: TokenDecimals,
 
     #[serde(rename = "oepsx64", with = "u128_as_string")]
     pub old_emissions_per_second_x64: u128,

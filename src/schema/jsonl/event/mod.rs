@@ -1,5 +1,6 @@
 pub mod definition;
 
+use crate::types::{Slot, BlockHeight, BlockTime, PubkeyString, SignatureString};
 use definition::*;
 use serde_derive::{Deserialize, Serialize};
 
@@ -33,11 +34,11 @@ Each line is a JSON object with the following schema:
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct WhirlpoolEventBlock {
     #[serde(rename = "s")]
-    pub slot: u64,
+    pub slot: Slot,
     #[serde(rename = "h")]
-    pub block_height: u64,
+    pub block_height: BlockHeight,
     #[serde(rename = "t")]
-    pub block_time: i64,
+    pub block_time: BlockTime,
     #[serde(rename = "x")]
     pub transactions: Vec<WhirlpoolEventTransaction>,
 }
@@ -45,9 +46,9 @@ pub struct WhirlpoolEventBlock {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolEventTransaction {
     #[serde(rename = "s")]
-    pub signature: String,
+    pub signature: SignatureString,
     #[serde(rename = "p")]
-    pub payer: String,
+    pub payer: PubkeyString,
     #[serde(rename = "e")]
     pub events: Vec<WhirlpoolEvent>,
 }

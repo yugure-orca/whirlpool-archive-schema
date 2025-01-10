@@ -1,5 +1,5 @@
 use crate::serde::{big_decimal_as_string, u128_as_string};
-use crate::types::{PubkeyBase58String, DecimalPrice};
+use crate::types::{PubkeyString, DecimalPrice};
 use super::TransferInfo;
 use serde_derive::{Deserialize, Serialize};
 
@@ -10,15 +10,15 @@ pub struct LiquidityDepositedEventPayload {
     pub origin: LiquidityDepositedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
     #[serde(rename = "pa")]
-    pub position_authority: PubkeyBase58String,
+    pub position_authority: PubkeyString,
     #[serde(rename = "p")]
-    pub position: PubkeyBase58String,
+    pub position: PubkeyString,
     #[serde(rename = "lta")]
-    pub lower_tick_array: PubkeyBase58String,
+    pub lower_tick_array: PubkeyString,
     #[serde(rename = "uta")]
-    pub upper_tick_array: PubkeyBase58String,
+    pub upper_tick_array: PubkeyString,
 
     #[serde(rename = "ld", with = "u128_as_string")]
     pub liquidity_delta: u128,

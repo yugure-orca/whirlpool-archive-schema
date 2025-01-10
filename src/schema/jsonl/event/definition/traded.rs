@@ -1,6 +1,6 @@
 use crate::serde::{big_decimal_as_string, u128_as_string};
 use super::TransferInfo;
-use crate::types::{PubkeyBase58String, DecimalPrice};
+use crate::types::{PubkeyString, DecimalPrice};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -10,9 +10,9 @@ pub struct TradedEventPayload {
     pub origin: TradedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
     #[serde(rename = "ta")]
-    pub token_authority: PubkeyBase58String,
+    pub token_authority: PubkeyString,
 
     #[serde(rename = "tm")]
     pub trade_mode: TradeMode,

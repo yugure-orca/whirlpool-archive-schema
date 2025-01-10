@@ -1,6 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use crate::serde::{vec_u8_as_base64_string, u64_as_string};
-use crate::types::{Slot, BlockHeight, BlockTime, PubkeyBase58String, SignatureBase58String, Bytes};
+use crate::types::{Slot, BlockHeight, BlockTime, PubkeyString, SignatureString, Bytes};
 mod definition;
 pub use definition::*;
 
@@ -50,8 +50,8 @@ pub struct WhirlpoolTransactionBlock {
 #[serde(rename_all = "camelCase")]
 pub struct Transaction {
   pub index: u32,
-  pub signature: SignatureBase58String,
-  pub payer: PubkeyBase58String,
+  pub signature: SignatureString,
+  pub payer: PubkeyString,
   pub balances: Vec<TransactionBalance>,
   pub instructions: Vec<TransactionInstruction>,
 }
@@ -59,7 +59,7 @@ pub struct Transaction {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct TransactionBalance {
-  pub account: PubkeyBase58String,
+  pub account: PubkeyString,
   #[serde(with = "u64_as_string")]
   pub pre: u64,
   #[serde(with = "u64_as_string")]

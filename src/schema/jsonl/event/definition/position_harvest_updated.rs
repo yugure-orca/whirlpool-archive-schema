@@ -1,4 +1,4 @@
-use crate::types::PubkeyBase58String;
+use crate::types::PubkeyString;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,9 +8,9 @@ pub struct PositionHarvestUpdatedEventPayload {
     pub origin: PositionHarvestUpdatedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyBase58String,
+    pub whirlpool: PubkeyString,
     #[serde(rename = "p")]
-    pub position: PubkeyBase58String,
+    pub position: PubkeyString,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
