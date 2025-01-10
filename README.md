@@ -1,3 +1,3 @@
-# whirlpool-archives
+# whirlpool-archived-data
 
-This crate provides a Rust library for reading and writing archives of Whirlpool data.
+This crate provides a Rust library for reading and writing archived data of Whirlpool program.
