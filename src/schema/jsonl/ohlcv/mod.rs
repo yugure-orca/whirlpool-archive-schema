@@ -1,6 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use crate::serde::{big_decimal_as_string, u128_as_string, u64_as_string};
-use crate::types::{PubkeyString, DecimalPrice, TokenDecimals};
+use crate::types::{PubkeyString, DecimalPrice, TokenDecimals, Slot, BlockTime};
 
 /*
 
@@ -145,9 +145,9 @@ pub enum InitialState {
     #[serde(rename = "idp", with = "big_decimal_as_string")]
     initial_decimal_price: DecimalPrice,
     #[serde(rename = "is")]
-    initialized_slot: u64,
+    initialized_slot: Slot,
     #[serde(rename = "ibt")]
-    initialized_block_time: i64,
+    initialized_block_time: BlockTime,
   },
 }
 
@@ -166,7 +166,7 @@ pub struct EstimatedFees {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvDataUnit {
   #[serde(rename = "t")]
-  pub timestamp: i64,
+  pub timestamp: BlockTime,
   #[serde(rename = "p")]
   pub ohlc: WhirlpoolOhlcvData,
   #[serde(rename = "v")]
