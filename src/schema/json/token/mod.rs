@@ -1,4 +1,5 @@
 use serde_derive::{Deserialize, Serialize};
+use crate::types::{Slot, BlockHeight, BlockTime, PubkeyBase58String, Decimals};
 
 /*
 
@@ -22,15 +23,15 @@ A whirlpool token file (whirlpool-token-yyyymmdd.json.gz) is GZIP compressed JSO
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct WhirlpoolToken {
-  pub slot: u64,
-  pub block_height: u64,
-  pub block_time: i64,
+  pub slot: Slot,
+  pub block_height: BlockHeight,
+  pub block_time: BlockTime,
   pub tokens: Vec<TokenInfo>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct TokenInfo {
-  pub mint: String,
-  pub decimals: u8,
+  pub mint: PubkeyBase58String,
+  pub decimals: Decimals,
 }

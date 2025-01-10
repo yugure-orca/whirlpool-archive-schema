@@ -1,4 +1,5 @@
-use super::{PubkeyString, TransferInfo};
+use super::TransferInfo;
+use crate::types::PubkeyBase58String;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,11 +9,11 @@ pub struct PositionFeesHarvestedEventPayload {
     pub origin: PositionFeesHarvestedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyString,
+    pub whirlpool: PubkeyBase58String,
     #[serde(rename = "pa")]
-    pub position_authority: PubkeyString,
+    pub position_authority: PubkeyBase58String,
     #[serde(rename = "p")]
-    pub position: PubkeyString,
+    pub position: PubkeyBase58String,
 
     // transfer info
     #[serde(rename = "ta")]

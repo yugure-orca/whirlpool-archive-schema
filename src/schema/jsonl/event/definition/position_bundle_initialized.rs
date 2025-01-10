@@ -1,4 +1,4 @@
-use super::PubkeyString;
+use crate::types::PubkeyBase58String;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,13 +8,13 @@ pub struct PositionBundleInitializedEventPayload {
     pub origin: PositionBundleInitializedEventOrigin,
 
     #[serde(rename = "pb")]
-    pub position_bundle: PubkeyString,
+    pub position_bundle: PubkeyBase58String,
 
     #[serde(rename = "pbm")]
-    pub position_bundle_mint: PubkeyString,
+    pub position_bundle_mint: PubkeyBase58String,
 
     #[serde(rename = "pbo")]
-    pub position_bundle_owner: PubkeyString,
+    pub position_bundle_owner: PubkeyBase58String,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

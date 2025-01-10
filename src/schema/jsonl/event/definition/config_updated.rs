@@ -1,4 +1,4 @@
-use super::PubkeyString;
+use crate::types::PubkeyBase58String;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,22 +8,22 @@ pub struct ConfigUpdatedEventPayload {
     pub origin: ConfigUpdatedEventOrigin,
 
     #[serde(rename = "c")]
-    pub config: PubkeyString,
+    pub config: PubkeyBase58String,
 
     #[serde(rename = "ofa")]
-    pub old_fee_authority: PubkeyString,
+    pub old_fee_authority: PubkeyBase58String,
     #[serde(rename = "nfa")]
-    pub new_fee_authority: PubkeyString,
+    pub new_fee_authority: PubkeyBase58String,
 
     #[serde(rename = "ocpfa")]
-    pub old_collect_protocol_fees_authority: PubkeyString,
+    pub old_collect_protocol_fees_authority: PubkeyBase58String,
     #[serde(rename = "ncpfa")]
-    pub new_collect_protocol_fees_authority: PubkeyString,
+    pub new_collect_protocol_fees_authority: PubkeyBase58String,
 
     #[serde(rename = "oresa")]
-    pub old_reward_emissions_super_authority: PubkeyString,
+    pub old_reward_emissions_super_authority: PubkeyBase58String,
     #[serde(rename = "nresa")]
-    pub new_reward_emissions_super_authority: PubkeyString,
+    pub new_reward_emissions_super_authority: PubkeyBase58String,
 
     #[serde(rename = "odpfr")]
     pub old_default_protocol_fee_rate: u16,

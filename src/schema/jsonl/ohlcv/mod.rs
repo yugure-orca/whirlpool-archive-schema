@@ -1,5 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use crate::serde::{big_decimal_as_string, u128_as_string, u64_as_string};
+use crate::types::{PubkeyBase58String, DecimalPrice, Decimals};
 
 /*
 
@@ -79,10 +80,6 @@ Each line is a JSON object with the following schema:
 
 */
 
-pub type PubkeyString = String;
-pub type DecimalPrice = bigdecimal::BigDecimal;
-pub type Decimals = u8;
-
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvDailyData {
   #[serde(flatten)]
@@ -112,9 +109,9 @@ pub struct WhirlpoolOhlcvMinutelyData {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct WhirlpoolOhlcvMetadata {
   #[serde(rename = "w")]
-  pub whirlpool: PubkeyString,
+  pub whirlpool: PubkeyBase58String,
   #[serde(rename = "wc")]
-  pub whirlpools_config: PubkeyString,
+  pub whirlpools_config: PubkeyBase58String,
   #[serde(rename = "ta")]
   pub token_a: TokenData,
   #[serde(rename = "tb")]
@@ -126,7 +123,7 @@ pub struct WhirlpoolOhlcvMetadata {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct TokenData {
   #[serde(rename = "m")]
-  pub mint: PubkeyString,
+  pub mint: PubkeyBase58String,
   #[serde(rename = "d")]
   pub decimals: Decimals,
 }

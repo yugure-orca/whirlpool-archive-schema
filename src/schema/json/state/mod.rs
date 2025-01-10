@@ -1,5 +1,5 @@
 use serde_derive::{Deserialize, Serialize};
-use crate::serde::vec_u8_as_base64_string;
+use crate::{serde::vec_u8_as_base64_string, types::{Slot, BlockHeight, BlockTime, Bytes, PubkeyBase58String}};
 
 /*
 
@@ -24,18 +24,18 @@ A whirlpool state file (whirlpool-state-yyyymmdd.json.gz) is GZIP compressed JSO
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct WhirlpoolState {
-  pub slot: u64,
-  pub block_height: u64,
-  pub block_time: i64,
+  pub slot: Slot,
+  pub block_height: BlockHeight,
+  pub block_time: BlockTime,
   pub accounts: Vec<WhirlpoolStateAccount>,
   #[serde(with = "vec_u8_as_base64_string")]
-  pub program_data: Vec<u8>,
+  pub program_data: Bytes,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct WhirlpoolStateAccount {
-  pub pubkey: String,
+  pub pubkey: PubkeyBase58String,
   #[serde(with = "vec_u8_as_base64_string")]
-  pub data: Vec<u8>,
+  pub data: Bytes,
 }

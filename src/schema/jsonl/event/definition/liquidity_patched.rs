@@ -1,5 +1,5 @@
 use crate::serde::u128_as_string;
-use super::PubkeyString;
+use crate::types::PubkeyBase58String;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -9,7 +9,7 @@ pub struct LiquidityPatchedEventPayload {
     pub origin: LiquidityPatchedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyString,
+    pub whirlpool: PubkeyBase58String,
 
     #[serde(rename = "ld", with = "u128_as_string")]
     pub liquidity_delta: u128,

@@ -58,17 +58,14 @@ mod program_deployed;
 pub use program_deployed::*;
 
 use crate::serde::{option_u64_as_string, u64_as_string};
-use bigdecimal::BigDecimal;
 use serde_derive::{Deserialize, Serialize};
 
-pub type PubkeyString = String;
-pub type DecimalPrice = BigDecimal;
-pub type Decimals = u8;
+use crate::types::{PubkeyBase58String, Decimals};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 pub struct TransferInfo {
     #[serde(rename = "m")]
-    pub mint: PubkeyString,
+    pub mint: PubkeyBase58String,
 
     #[serde(rename = "a", with = "u64_as_string")]
     pub amount: u64,

@@ -1,4 +1,4 @@
-use super::PubkeyString;
+use crate::types::PubkeyBase58String;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,16 +8,16 @@ pub struct ConfigExtensionInitializedEventPayload {
     pub origin: ConfigExtensionInitializedEventOrigin,
 
     #[serde(rename = "c")]
-    pub config: PubkeyString,
+    pub config: PubkeyBase58String,
 
     #[serde(rename = "ce")]
-    pub config_extension: PubkeyString,
+    pub config_extension: PubkeyBase58String,
 
     #[serde(rename = "cea")]
-    pub config_extension_authority: PubkeyString,
+    pub config_extension_authority: PubkeyBase58String,
 
     #[serde(rename = "tba")]
-    pub token_badge_authority: PubkeyString,
+    pub token_badge_authority: PubkeyBase58String,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

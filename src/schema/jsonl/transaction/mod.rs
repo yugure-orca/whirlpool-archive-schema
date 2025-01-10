@@ -1,6 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use crate::serde::{vec_u8_as_base64_string, u64_as_string};
-
+use crate::types::{Slot, BlockHeight, BlockTime, PubkeyBase58String, SignatureBase58String, Bytes};
 mod definition;
 pub use definition::*;
 
@@ -40,9 +40,9 @@ Each line is a JSON object with the following schema:
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct WhirlpoolTransactionBlock {
-  pub slot: u64,
-  pub block_height: u64,
-  pub block_time: i64,
+  pub slot: Slot,
+  pub block_height: BlockHeight,
+  pub block_time: BlockTime,
   pub transactions: Vec<Transaction>,
 }
 
@@ -50,8 +50,8 @@ pub struct WhirlpoolTransactionBlock {
 #[serde(rename_all = "camelCase")]
 pub struct Transaction {
   pub index: u32,
-  pub signature: String,
-  pub payer: String,
+  pub signature: SignatureBase58String,
+  pub payer: PubkeyBase58String,
   pub balances: Vec<TransactionBalance>,
   pub instructions: Vec<TransactionInstruction>,
 }
@@ -59,7 +59,7 @@ pub struct Transaction {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct TransactionBalance {
-  pub account: String,
+  pub account: PubkeyBase58String,
   #[serde(with = "u64_as_string")]
   pub pre: u64,
   #[serde(with = "u64_as_string")]
@@ -77,7 +77,7 @@ pub enum TransactionInstruction {
 #[serde(rename_all = "camelCase")]
 pub struct DecodedProgramDeployInstruction {
   #[serde(with = "vec_u8_as_base64_string")]
-  pub program_data: Vec<u8>,
+  pub program_data: Bytes,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

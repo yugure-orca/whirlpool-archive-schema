@@ -1,4 +1,4 @@
-use super::PubkeyString;
+use crate::types::PubkeyBase58String;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,9 +8,9 @@ pub struct PoolProtocolFeeRateUpdatedEventPayload {
     pub origin: PoolProtocolFeeRateUpdatedEventOrigin,
 
     #[serde(rename = "c")]
-    pub config: PubkeyString,
+    pub config: PubkeyBase58String,
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyString,
+    pub whirlpool: PubkeyBase58String,
 
     #[serde(rename = "opfr")]
     pub old_protocol_fee_rate: u16,

@@ -1,4 +1,5 @@
-use super::{Decimals, PubkeyString, TokenProgram};
+use super::TokenProgram;
+use crate::types::{PubkeyBase58String, Decimals};
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -8,13 +9,13 @@ pub struct RewardInitializedEventPayload {
     pub origin: RewardInitializedEventOrigin,
 
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyString,
+    pub whirlpool: PubkeyBase58String,
 
     #[serde(rename = "ri")]
     pub reward_index: u8,
 
     #[serde(rename = "rm")]
-    pub reward_mint: PubkeyString,
+    pub reward_mint: PubkeyBase58String,
 
     #[serde(rename = "rtp")]
     pub reward_token_program: TokenProgram,

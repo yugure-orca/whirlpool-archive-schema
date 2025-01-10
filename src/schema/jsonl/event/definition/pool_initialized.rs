@@ -1,5 +1,7 @@
 use crate::serde::{big_decimal_as_string, u128_as_string};
-use super::{DecimalPrice, Decimals, PubkeyString, TokenProgram};
+use crate::types::{PubkeyBase58String, DecimalPrice, Decimals};
+use super::TokenProgram;
+
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
@@ -16,17 +18,17 @@ pub struct PoolInitializedEventPayload {
     pub decimal_price: DecimalPrice,
 
     #[serde(rename = "c")]
-    pub config: PubkeyString,
+    pub config: PubkeyBase58String,
     #[serde(rename = "tma")]
-    pub token_mint_a: PubkeyString,
+    pub token_mint_a: PubkeyBase58String,
     #[serde(rename = "tmb")]
-    pub token_mint_b: PubkeyString,
+    pub token_mint_b: PubkeyBase58String,
     #[serde(rename = "f")]
-    pub funder: PubkeyString,
+    pub funder: PubkeyBase58String,
     #[serde(rename = "w")]
-    pub whirlpool: PubkeyString,
+    pub whirlpool: PubkeyBase58String,
     #[serde(rename = "ft")]
-    pub fee_tier: PubkeyString,
+    pub fee_tier: PubkeyBase58String,
 
     #[serde(rename = "tpa")]
     pub token_program_a: TokenProgram,
