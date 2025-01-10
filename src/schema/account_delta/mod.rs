@@ -63,7 +63,7 @@ pub struct WhirlpoolAccountDelta {
     #[serde(rename = "p")]
     pub pubkey: PubkeyString,
     #[serde(rename = "t")]
-    pub account_type: WhirlpoolAccountType,
+    pub account_type: AccountType,
     #[serde(flatten)]
     pub delta: AccountDataDelta,
 }
@@ -96,7 +96,7 @@ pub struct AccountDataDeltaSegment {
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]
-pub enum WhirlpoolAccountType {
+pub enum AccountType {
     #[serde(rename = "C")]
     Config,
     #[serde(rename = "CE")]
